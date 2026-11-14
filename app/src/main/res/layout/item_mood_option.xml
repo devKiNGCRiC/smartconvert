@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    A mood preview card. SettingsSheet inflates it with that mood's own theme,
+    so the swatch shows the real colours, pattern and display font.
+-->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/moodCard"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="?attr/scSurface"
+    app:shapeAppearance="?attr/scTileShape"
+    app:strokeColor="?attr/scLine"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:background="?attr/scHero">
+
+            <com.unitconverter.app.presentation.widget.PatternView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:pattern="?attr/scPattern"
+                app:patternAlpha="0.25"
+                app:patternTint="?attr/scOnHero" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="?attr/scFontDisplay"
+                android:text="Aa"
+                android:textColor="?attr/scOnHero"
+                android:textSize="30sp"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="8dp"
+                android:background="@drawable/bg_badge"
+                android:backgroundTint="?attr/scAccent" />
+
+            <ImageView
+                android:id="@+id/moodCheck"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="6dp"
+                android:background="@drawable/bg_badge"
+                android:backgroundTint="?attr/scAccent"
+                android:contentDescription="@string/cd_selected"
+                android:padding="4dp"
+                android:src="@drawable/ic_check"
+                android:visibility="gone"
+                app:tint="?attr/scOnAccent" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/moodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:maxLines="2"
+            android:textAppearance="@style/TextAppearance.SC.Label"
+            android:textColor="?attr/scInk"
+            tools:text="Jantar Mantar" />
+
+        <TextView
+            android:id="@+id/moodHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:maxLines="3"
+            android:textAppearance="@style/TextAppearance.SC.Caption"
+            android:textColor="?attr/scInkMuted"
+            android:textSize="12sp"
+            tools:text="Jaipur sandstone and night sky" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
