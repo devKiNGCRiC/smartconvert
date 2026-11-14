@@ -1,127 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    MODERN CATEGORY CARD - Glassmorphism Design
-    
-    Enhanced with:
-    - Glassmorphism effect with semi-transparent background
-    - Gradient overlays for visual depth
-    - Smooth animations and ripple effects
-    - Category-specific accent colors
-    - Modern rounded corners and shadows
-    - Optimized for Material Design 3
+    Category tile. The unit symbol (m, kg, °C…) is the icon: it tells you
+    what lives inside better than a picture does.
 -->
-<com.google.android.material.card.MaterialCardView 
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/categoryCard"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/category_card_height"
-    android:layout_margin="@dimen/card_margin"
+    android:layout_height="112dp"
+    android:layout_margin="5dp"
     android:clickable="true"
-    android:focusable="true"
-    app:cardCornerRadius="@dimen/corner_large"
-    app:cardElevation="@dimen/elevation_medium"
-    app:cardBackgroundColor="@color/card_background"
-    app:strokeWidth="@dimen/stroke_thin"
-    app:strokeColor="@color/divider"
-    app:rippleColor="@color/ripple_primary">
+    android:focusable="true">
 
-    <!-- Root FrameLayout for layering gradient and content -->
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <!-- Gradient Background Layer (will be colored dynamically) -->
-        <View
-            android:id="@+id/categoryGradientBackground"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_gradient_primary"
-            android:alpha="0.08" />
+        <TextView
+            android:id="@+id/categoryIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/barlow_condensed_semibold"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="@color/text_strong"
+            android:textSize="34sp"
+            tools:text="km/h" />
 
-        <!-- Accent Bar (left edge) -->
-        <View
-            android:id="@+id/categoryAccentBar"
-            android:layout_width="4dp"
-            android:layout_height="match_parent"
-            android:background="@color/primary"
-            android:layout_gravity="start" />
-
-        <!-- Content Container -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="@dimen/padding_standard"
-            android:paddingStart="@dimen/padding_large">
-
-            <!-- Icon Container with circular background -->
-            <FrameLayout
-                android:layout_width="@dimen/category_icon_size"
-                android:layout_height="@dimen/category_icon_size"
-                android:layout_marginBottom="@dimen/spacing_small">
-
-                <!-- Circular background for icon -->
-                <View
-                    android:id="@+id/iconBackground"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_gradient_primary"
-                    android:alpha="0.15" />
-
-                <!-- Category Icon (Emoji) -->
-                <TextView
-                    android:id="@+id/categoryIcon"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textSize="28sp"
-                    android:includeFontPadding="false"
-                    tools:text="📏" />
-            </FrameLayout>
-
-            <!-- Category Name -->
-            <TextView
-                android:id="@+id/categoryName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/category_title_size"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary_light"
-                android:gravity="center"
-                android:letterSpacing="0.01"
-                android:maxLines="1"
-                android:ellipsize="end"
-                tools:text="Length" />
-
-            <!-- Unit Count Hint -->
-            <TextView
-                android:id="@+id/categoryUnitCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_tiny"
-                android:textSize="@dimen/text_size_small"
-                android:textColor="@color/text_secondary_light"
-                android:gravity="center"
-                android:alpha="0.7"
-                android:visibility="gone"
-                tools:visibility="visible"
-                tools:text="12 units" />
-
-        </LinearLayout>
-
-        <!-- Shine Effect (for subtle animation) -->
-        <View
-            android:id="@+id/shineEffect"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@android:color/white"
-            android:alpha="0"
-            android:translationX="-40dp" />
-
-    </FrameLayout>
-
+        <TextView
+            android:id="@+id/categoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.SC.TitleMedium"
+            android:textColor="@color/text_muted"
+            tools:text="Speed" />
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

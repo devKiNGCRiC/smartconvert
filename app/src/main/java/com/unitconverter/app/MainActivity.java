@@ -149,11 +149,11 @@ public class MainActivity extends AppCompatActivity implements
         recentAdapter = new RecentConversionsAdapter(this);
         recentConversionsRecyclerView.setAdapter(recentAdapter);
         
-        // View All History button click
-        viewAllHistoryButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
-            startActivity(intent);
-        });
+        // Both the header icon and "View all" open the full history
+        View.OnClickListener openHistory = v ->
+                startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+        viewAllHistoryButton.setOnClickListener(openHistory);
+        findViewById(R.id.historyButton).setOnClickListener(openHistory);
     }
 
     /**

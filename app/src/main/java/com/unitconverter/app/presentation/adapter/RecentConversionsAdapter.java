@@ -52,6 +52,8 @@ public class RecentConversionsAdapter extends RecyclerView.Adapter<RecentConvers
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ConversionHistoryEntity conversion = conversions.get(position);
         holder.bind(conversion, clickListener);
+        // Hairline between rows, none under the last one
+        holder.divider.setVisibility(position == getItemCount() - 1 ? View.INVISIBLE : View.VISIBLE);
     }
 
     @Override
@@ -63,12 +65,14 @@ public class RecentConversionsAdapter extends RecyclerView.Adapter<RecentConvers
         private final TextView conversionText;
         private final TextView timestampText;
         private final ImageView favoriteIcon;
+        final View divider;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             conversionText = itemView.findViewById(R.id.conversionText);
             timestampText = itemView.findViewById(R.id.timestampText);
             favoriteIcon = itemView.findViewById(R.id.favoriteIcon);
+            divider = itemView.findViewById(R.id.divider);
         }
 
         public void bind(ConversionHistoryEntity conversion, OnConversionClickListener listener) {
@@ -86,11 +90,11 @@ public class RecentConversionsAdapter extends RecyclerView.Adapter<RecentConvers
 
             // Set favorite icon
             if (conversion.isFavorite()) {
-                favoriteIcon.setImageResource(R.drawable.ic_favorite_filled);
-                favoriteIcon.setColorFilter(ContextCompat.getColor(itemView.getContext(), R.color.error));
+                favoriteIcon.setImageResource(R.drawable.ic_star_filled);
+                favoriteIcon.setColorFilter(ContextCompat.getColor(itemView.getContext(), R.color.mark));
             } else {
-                favoriteIcon.setImageResource(R.drawable.ic_favorite_border);
-                favoriteIcon.setColorFilter(ContextCompat.getColor(itemView.getContext(), R.color.text_secondary_light));
+                favoriteIcon.setImageResource(R.drawable.ic_star_border);
+                favoriteIcon.setColorFilter(ContextCompat.getColor(itemView.getContext(), R.color.text_faint));
             }
 
             // Click listeners

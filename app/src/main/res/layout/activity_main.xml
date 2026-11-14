@@ -1,188 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    TEACHING NOTE: Main Activity Layout
-    
-    Design Principles Applied:
-    1. Material Design 3: Modern Google design guidelines
-    2. Responsive: Works on all screen sizes
-    3. Accessible: Content descriptions, good contrast, touch targets 48dp+
-    4. User-Friendly: Clear hierarchy, appropriate spacing
-    
-    Layout Structure:
-    - CoordinatorLayout: Root container for Material Design interactions
-    - AppBarLayout: Top app bar with title
-    - RecyclerView: Grid of category cards
-    - ProgressBar: Loading indicator
+    Home: pick what you're measuring, then see recent conversions.
+    Categories come first because choosing one is the main job of this screen.
 -->
-<androidx.coordinatorlayout.widget.CoordinatorLayout 
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light"
+    android:background="@color/paper"
     tools:context=".MainActivity">
 
-    <!-- App Bar -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="4dp"
-        app:elevation="4dp">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/primary"
-            app:title="@string/main_title"
-            app:titleTextColor="@color/white"
-            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <!-- Main Content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/spacing_medium">
+            android:paddingStart="@dimen/screen_gutter"
+            android:paddingEnd="@dimen/screen_gutter"
+            android:paddingTop="8dp"
+            android:paddingBottom="32dp">
 
-            <!-- Subtitle/Description -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Brand row -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_large"
-                app:cardCornerRadius="@dimen/card_corner_radius"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/primary_light">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_medium">
+                    android:layout_weight="1"
+                    android:text="@string/app_name"
+                    android:textAppearance="@style/TextAppearance.SC.Label"
+                    android:textColor="@color/text_muted" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/category_selection_title"
-                        android:textSize="@dimen/text_size_large"
-                        android:textStyle="bold"
-                        android:textColor="@color/primary_dark" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/historyButton"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/history_title"
+                    app:icon="@drawable/ic_history"
+                    app:iconTint="@color/text_strong"
+                    app:rippleColor="@color/ripple" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_tiny"
-                        android:text="@string/main_subtitle"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textColor="@color/text_secondary_light" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/home_question"
+                android:textAppearance="@style/TextAppearance.SC.Headline"
+                android:textColor="@color/text_strong" />
 
-                </LinearLayout>
+            <com.unitconverter.app.presentation.widget.RulerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp"
+                app:rulerColor="@color/rule"
+                app:rulerFromBottom="true" />
 
-            </com.google.android.material.card.MaterialCardView>
+            <!-- Category grid. Items carry 5dp margins; pull the grid out so tile edges align with the gutter. -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoriesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-5dp"
+                android:layout_marginEnd="-5dp"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="8"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_category"
+                tools:spanCount="2" />
 
-            <!-- Recent Conversions Section -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:indeterminateTint="@color/text_strong"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/emptyStateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:text="@string/empty_categories"
+                android:textAppearance="@style/TextAppearance.SC.BodyMedium"
+                android:textColor="@color/text_muted"
+                android:visibility="gone" />
+
+            <!-- Recent conversions (hidden until there is history) -->
             <LinearLayout
                 android:id="@+id/recentConversionsSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:orientation="vertical"
-                android:layout_marginBottom="@dimen/spacing_large"
                 android:visibility="gone"
                 tools:visibility="visible">
 
-                <!-- Section Header -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="@dimen/spacing_small">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/recent_conversions"
-                        android:textSize="@dimen/text_size_large"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary_light"/>
+                        android:textAppearance="@style/TextAppearance.SC.TitleLarge"
+                        android:textColor="@color/text_strong" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/viewAllHistoryButton"
+                        style="@style/Widget.SC.Button.Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/view_all"
-                        android:textSize="@dimen/text_size_small"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        app:icon="@drawable/ic_history"
-                        app:iconSize="18dp"/>
+                        android:layout_marginEnd="-12dp"
+                        android:text="@string/view_all" />
                 </LinearLayout>
 
-                <!-- Recent Conversions List -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recentConversionsRecyclerView"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    tools:listitem="@layout/item_recent_conversion"
-                    tools:itemCount="3"/>
+                    android:layout_height="wrap_content">
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recentConversionsRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_recent_conversion" />
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-            <!-- Category Grid using RecyclerView -->
-            <!-- TEACHING NOTE: RecyclerView is better than GridView
-                 - More efficient (view recycling)
-                 - More flexible (different item types, animations)
-                 - Better performance with large lists
-            -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/categoriesRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
-                tools:listitem="@layout/item_category"
-                tools:itemCount="8"
-                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:spanCount="2" />
-
-            <!-- Loading Indicator -->
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:visibility="gone"
-                tools:visibility="visible" />
-
-            <!-- Empty State -->
-            <TextView
-                android:id="@+id/emptyStateText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:text="@string/empty_categories"
-                android:textSize="@dimen/text_size_medium"
-                android:textColor="@color/text_secondary_light"
-                android:visibility="gone"
-                tools:visibility="gone" />
-
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
-    <!-- Error Snackbar will appear here automatically -->
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -12,17 +12,18 @@ package com.unitconverter.app.domain.model;
  * - Compile-time safety vs String constants
  */
 public enum UnitCategory {
-    LENGTH("Length", "📏", "Convert between meters, feet, inches, etc."),
-    WEIGHT("Weight", "⚖️", "Convert between kilograms, pounds, ounces, etc."),
-    TEMPERATURE("Temperature", "🌡️", "Convert between Celsius, Fahrenheit, Kelvin"),
-    VOLUME("Volume", "🧪", "Convert between liters, gallons, cups, etc."),
-    AREA("Area", "📐", "Convert between square meters, acres, hectares, etc."),
-    SPEED("Speed", "🚗", "Convert between km/h, mph, m/s, etc."),
-    TIME("Time", "⏰", "Convert between seconds, minutes, hours, days, etc."),
-    DIGITAL_STORAGE("Digital Storage", "💾", "Convert between bytes, KB, MB, GB, TB");
+    LENGTH("Length", "📏", "m", "Convert between meters, feet, inches, etc."),
+    WEIGHT("Weight", "⚖️", "kg", "Convert between kilograms, pounds, ounces, etc."),
+    TEMPERATURE("Temperature", "🌡️", "°C", "Convert between Celsius, Fahrenheit, Kelvin"),
+    VOLUME("Volume", "🧪", "L", "Convert between liters, gallons, cups, etc."),
+    AREA("Area", "📐", "m²", "Convert between square meters, acres, hectares, etc."),
+    SPEED("Speed", "🚗", "km/h", "Convert between km/h, mph, m/s, etc."),
+    TIME("Time", "⏰", "s", "Convert between seconds, minutes, hours, days, etc."),
+    DIGITAL_STORAGE("Digital Storage", "💾", "GB", "Convert between bytes, KB, MB, GB, TB");
 
     private final String displayName;
     private final String icon;
+    private final String symbol;
     private final String description;
 
     /**
@@ -30,11 +31,13 @@ public enum UnitCategory {
      * 
      * @param displayName User-friendly name shown in UI
      * @param icon        Emoji icon for visual identification
+     * @param symbol      Representative unit symbol shown on the category tile
      * @param description Brief explanation of what units are included
      */
-    UnitCategory(String displayName, String icon, String description) {
+    UnitCategory(String displayName, String icon, String symbol, String description) {
         this.displayName = displayName;
         this.icon = icon;
+        this.symbol = symbol;
         this.description = description;
     }
 
@@ -45,6 +48,23 @@ public enum UnitCategory {
 
     public String getIcon() {
         return icon;
+    }
+
+    /** A representative unit symbol (e.g. "km/h"), used as the category's visual mark. */
+    public String getSymbol() {
+        return symbol;
+    }
+
+    /**
+     * Display name for a stored enum name such as "DIGITAL_STORAGE";
+     * falls back to the raw value if it no longer matches a category.
+     */
+    public static String displayNameOf(String name) {
+        try {
+            return valueOf(name).displayName;
+        } catch (IllegalArgumentException | NullPointerException e) {
+            return name;
+        }
     }
 
     public String getDescription() {
