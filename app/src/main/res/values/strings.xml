@@ -93,9 +93,66 @@
     <string name="item_deleted">Item deleted</string>
     <string name="undo">Undo</string>
 
-    <!-- Redesign -->
-    <string name="home_question">What are you measuring?</string>
+    <!-- ===== Measures of India redesign ===== -->
+    <string name="home_question">What shall we measure today?</string>
     <string name="copy_result">Copy result</string>
+    <string name="share_result">Share result</string>
     <string name="result_copied">Copied %s</string>
     <string name="result_placeholder">0</string>
+    <string name="settings_title">Look and feel</string>
+    <string name="open_settings">Change look</string>
+    <string name="settings_mood">Mood</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="appearance_system">System</string>
+    <string name="appearance_light">Light</string>
+    <string name="appearance_dark">Dark</string>
+    <string name="settings_numbers">Big numbers</string>
+    <string name="numbers_auto">Auto</string>
+    <string name="numbers_international">1,000,000</string>
+    <string name="numbers_indian">10,00,000</string>
+    <string name="numbers_hint">Auto uses lakh and crore in India, million and billion elsewhere.</string>
+    <string name="settings_indian_units">Indian traditional units</string>
+    <string name="settings_indian_units_hint">Tola, seer, gaj, bigha, guntha and more</string>
+    <string name="settings_hindi">Hindi greetings</string>
+    <string name="settings_hindi_hint">Adds a line of Hindi to the home greeting</string>
+    <string name="mood_jantar">Jantar Mantar</string>
+    <string name="mood_jantar_hint">Jaipur sandstone and night sky</string>
+    <string name="mood_bazaar">Bazaar</string>
+    <string name="mood_bazaar_hint">Block print in indigo and madder</string>
+    <string name="mood_truck">Truck Art</string>
+    <string name="mood_truck_hint">Painted highway colours</string>
+    <string name="fact_title">Measure of the day</string>
+    <string name="units_count">%1$d units</string>
+    <string name="units_count_indian">%1$d units, %2$d Indian</string>
+    <string name="choose_from_unit">Convert from</string>
+    <string name="choose_to_unit">Convert to</string>
+    <string name="search_units">Search units</string>
+    <string name="no_units_match">No unit matches that.</string>
+    <string name="system_metric">Metric</string>
+    <string name="system_imperial">Imperial and US</string>
+    <string name="system_indian">Indian traditional</string>
+    <string name="system_other">Standard</string>
+    <string name="every_unit_title">In every unit</string>
+    <string name="every_unit_hint">Tap a row to convert to it.</string>
+    <string name="quick_values">Quick values</string>
+    <string name="footer_tagline">Measured with care in India, for everyone.</string>
+    <string name="cd_unit_picker">%1$s: %2$s. Double tap to change.</string>
+    <string name="cd_selected">Selected</string>
+    <string name="mood_changed">%s mood on</string>
+    <string-array name="facts">
+        <item>Harappan traders used polished stone cube weights in a regular series (1, 2, 4, 8, 16…) about 4,500 years ago.</item>
+        <item>The metre was first defined in 1793 as one ten-millionth of the distance from the North Pole to the equator.</item>
+        <item>The ivory scale found at Lothal, Gujarat, is marked in divisions of about 1.7 mm, one of the finest rulers of the ancient world.</item>
+        <item>Since 2019 the kilogram has been defined by the Planck constant, not by a metal cylinder kept near Paris.</item>
+        <item>Jaipur\'s Samrat Yantra is a sundial 27 m tall. Its shadow moves about 1 mm every second.</item>
+        <item>A nautical mile, 1,852 m, is about one minute of latitude, which is why ships and planes use it.</item>
+        <item>A tola is 11.66 g, and it is still used in gold and silver markets across South Asia.</item>
+        <item>Anders Celsius first set 0 for boiling water and 100 for freezing; the scale was flipped after his death.</item>
+        <item>A lakh is 1,00,000 and a crore is 1,00,00,000. The words come from Sanskrit laksha and koti.</item>
+        <item>Strictly, 1,024 bytes is a kibibyte (KiB); a kilobyte (kB) is 1,000 bytes. Many apps, this one included, use 1,024.</item>
+        <item>A bigha is not one size: about 1,338 m² in Bengal, about 2,529 m² across much of North India.</item>
+        <item>The United States is one of only a few countries that has not adopted the metric system for everyday use.</item>
+        <item>Ancient Indian timekeeping counted the day in 60 ghadis of 24 minutes each.</item>
+        <item>India passed its metric law in 1956 and began switching over on 1 October 1958.</item>
+    </string-array>
 </resources>

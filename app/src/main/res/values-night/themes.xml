@@ -1,0 +1,96 @@
+<resources>
+    <!-- Night versions of the moods. Same tokens, after-dark palette. -->
+    <style name="Theme.SC.Jantar" parent="Base.Theme.SC">
+        <item name="scMoodName">Jantar Mantar</item>
+        <item name="scBg">@color/jm_bg_night</item>
+        <item name="scSurface">@color/jm_surface_night</item>
+        <item name="scSurfaceAlt">@color/jm_surface_alt_night</item>
+        <item name="scInk">@color/jm_ink_night</item>
+        <item name="scInkMuted">@color/jm_ink_muted_night</item>
+        <item name="scInkFaint">@color/jm_ink_faint_night</item>
+        <item name="scLine">@color/jm_line_night</item>
+        <item name="scHero">@color/jm_hero_night</item>
+        <item name="scHeroDeep">@color/jm_hero_deep_night</item>
+        <item name="scOnHero">@color/jm_on_hero</item>
+        <item name="scOnHeroMuted">@color/jm_on_hero_muted</item>
+        <item name="scGlass">@color/jm_glass</item>
+        <item name="scGlassLine">@color/jm_glass_line</item>
+        <item name="scAccent">@color/jm_accent_night</item>
+        <item name="scOnAccent">@color/jm_on_accent_night</item>
+        <item name="scAccentSoft">@color/jm_accent_soft_night</item>
+        <item name="scHueLength">@color/jm_hue_length</item>
+        <item name="scHueWeight">@color/jm_hue_weight</item>
+        <item name="scHueTemperature">@color/jm_hue_temperature</item>
+        <item name="scHueVolume">@color/jm_hue_volume</item>
+        <item name="scHueArea">@color/jm_hue_area</item>
+        <item name="scHueSpeed">@color/jm_hue_speed</item>
+        <item name="scHueTime">@color/jm_hue_time</item>
+        <item name="scHueStorage">@color/jm_hue_storage</item>
+        <item name="scFontDisplay">@font/rozhaone_regular</item>
+        <item name="scTileShape">@style/ShapeAppearance.SC.Arch</item>
+        <item name="scPattern">@drawable/pattern_jaali</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+    <style name="Theme.SC.Bazaar" parent="Base.Theme.SC">
+        <item name="scMoodName">Bazaar</item>
+        <item name="scBg">@color/bz_bg_night</item>
+        <item name="scSurface">@color/bz_surface_night</item>
+        <item name="scSurfaceAlt">@color/bz_surface_alt_night</item>
+        <item name="scInk">@color/bz_ink_night</item>
+        <item name="scInkMuted">@color/bz_ink_muted_night</item>
+        <item name="scInkFaint">@color/bz_ink_faint_night</item>
+        <item name="scLine">@color/bz_line_night</item>
+        <item name="scHero">@color/bz_hero_night</item>
+        <item name="scHeroDeep">@color/bz_hero_deep_night</item>
+        <item name="scOnHero">@color/bz_on_hero</item>
+        <item name="scOnHeroMuted">@color/bz_on_hero_muted</item>
+        <item name="scGlass">@color/bz_glass</item>
+        <item name="scGlassLine">@color/bz_glass_line</item>
+        <item name="scAccent">@color/bz_accent_night</item>
+        <item name="scOnAccent">@color/bz_on_accent_night</item>
+        <item name="scAccentSoft">@color/bz_accent_soft_night</item>
+        <item name="scHueLength">@color/bz_hue_length</item>
+        <item name="scHueWeight">@color/bz_hue_weight</item>
+        <item name="scHueTemperature">@color/bz_hue_temperature</item>
+        <item name="scHueVolume">@color/bz_hue_volume</item>
+        <item name="scHueArea">@color/bz_hue_area</item>
+        <item name="scHueSpeed">@color/bz_hue_speed</item>
+        <item name="scHueTime">@color/bz_hue_time</item>
+        <item name="scHueStorage">@color/bz_hue_storage</item>
+        <item name="scFontDisplay">@font/martel_extrabold</item>
+        <item name="scTileShape">@style/ShapeAppearance.SC.Stamp</item>
+        <item name="scPattern">@drawable/pattern_buti</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+    <style name="Theme.SC.Truck" parent="Base.Theme.SC">
+        <item name="scMoodName">Truck Art</item>
+        <item name="scBg">@color/tr_bg_night</item>
+        <item name="scSurface">@color/tr_surface_night</item>
+        <item name="scSurfaceAlt">@color/tr_surface_alt_night</item>
+        <item name="scInk">@color/tr_ink_night</item>
+        <item name="scInkMuted">@color/tr_ink_muted_night</item>
+        <item name="scInkFaint">@color/tr_ink_faint_night</item>
+        <item name="scLine">@color/tr_line_night</item>
+        <item name="scHero">@color/tr_hero_night</item>
+        <item name="scHeroDeep">@color/tr_hero_deep_night</item>
+        <item name="scOnHero">@color/tr_on_hero</item>
+        <item name="scOnHeroMuted">@color/tr_on_hero_muted</item>
+        <item name="scGlass">@color/tr_glass</item>
+        <item name="scGlassLine">@color/tr_glass_line</item>
+        <item name="scAccent">@color/tr_accent_night</item>
+        <item name="scOnAccent">@color/tr_on_accent_night</item>
+        <item name="scAccentSoft">@color/tr_accent_soft_night</item>
+        <item name="scHueLength">@color/tr_hue_length</item>
+        <item name="scHueWeight">@color/tr_hue_weight</item>
+        <item name="scHueTemperature">@color/tr_hue_temperature</item>
+        <item name="scHueVolume">@color/tr_hue_volume</item>
+        <item name="scHueArea">@color/tr_hue_area</item>
+        <item name="scHueSpeed">@color/tr_hue_speed</item>
+        <item name="scHueTime">@color/tr_hue_time</item>
+        <item name="scHueStorage">@color/tr_hue_storage</item>
+        <item name="scFontDisplay">@font/yatraone_regular</item>
+        <item name="scTileShape">@style/ShapeAppearance.SC.Plaque</item>
+        <item name="scPattern">@drawable/pattern_truck</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

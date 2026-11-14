@@ -1,45 +1,50 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!--
-        One theme for day and night; colours flip through values-night/colors.xml.
-        Typography: Barlow for interface text, Barlow Condensed for numbers.
+        SmartConvert theme engine.
+
+        Base.Theme.SC maps Material roles and widget styles onto sc* tokens.
+        Each mood (Theme.SC.Jantar / Bazaar / Truck) only sets tokens.
+        Night versions of the moods live in values-night/themes.xml.
+        ThemeManager picks the mood at runtime.
     -->
-    <style name="Base.Theme.UnitConverter" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/text_strong</item>
-        <item name="colorOnPrimary">@color/paper</item>
-        <item name="colorPrimaryContainer">@color/tape</item>
-        <item name="colorOnPrimaryContainer">@color/on_tape</item>
-        <item name="colorSecondary">@color/tape</item>
-        <item name="colorOnSecondary">@color/on_tape</item>
-        <item name="colorSecondaryContainer">@color/surface_sunk</item>
-        <item name="colorOnSecondaryContainer">@color/text_strong</item>
-        <item name="colorTertiary">@color/mark</item>
+    <style name="Base.Theme.SC" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">?attr/scAccent</item>
+        <item name="colorOnPrimary">?attr/scOnAccent</item>
+        <item name="colorPrimaryContainer">?attr/scAccentSoft</item>
+        <item name="colorOnPrimaryContainer">?attr/scInk</item>
+        <item name="colorSecondary">?attr/scHero</item>
+        <item name="colorOnSecondary">?attr/scOnHero</item>
+        <item name="colorSecondaryContainer">?attr/scSurfaceAlt</item>
+        <item name="colorOnSecondaryContainer">?attr/scInk</item>
+        <item name="colorTertiary">?attr/scAccent</item>
 
-        <item name="android:colorBackground">@color/paper</item>
-        <item name="colorOnBackground">@color/text_strong</item>
-        <item name="colorSurface">@color/surface</item>
-        <item name="colorOnSurface">@color/text_strong</item>
-        <item name="colorSurfaceVariant">@color/surface_sunk</item>
-        <item name="colorOnSurfaceVariant">@color/text_muted</item>
-        <item name="colorOutline">@color/rule</item>
-        <item name="colorOutlineVariant">@color/rule</item>
-        <item name="colorError">@color/danger</item>
-        <item name="colorOnError">@color/paper</item>
-        <item name="colorControlHighlight">@color/ripple</item>
-        <item name="android:textColorHighlight">@color/tape</item>
-        <item name="android:windowBackground">@color/paper</item>
+        <item name="android:colorBackground">?attr/scBg</item>
+        <item name="colorOnBackground">?attr/scInk</item>
+        <item name="colorSurface">?attr/scSurface</item>
+        <item name="colorOnSurface">?attr/scInk</item>
+        <item name="colorSurfaceVariant">?attr/scSurfaceAlt</item>
+        <item name="colorOnSurfaceVariant">?attr/scInkMuted</item>
+        <item name="colorOutline">?attr/scLine</item>
+        <item name="colorOutlineVariant">?attr/scLine</item>
+        <item name="colorControlNormal">?attr/scInkMuted</item>
+        <item name="colorControlActivated">?attr/scAccent</item>
+        <item name="android:textColorPrimary">?attr/scInk</item>
+        <item name="android:textColorSecondary">?attr/scInkMuted</item>
+        <item name="android:textColorHint">?attr/scInkFaint</item>
+        <item name="android:windowBackground">?attr/scBg</item>
+        <!-- Surfaces keep their exact colour when raised (no accent-tinted overlay) -->
+        <item name="elevationOverlayEnabled">false</item>
 
-        <!-- Default font via the theme's textAppearance (lowest precedence).
-             Setting fontFamily on the theme itself would override every
-             textAppearance font in the app. -->
-        <item name="android:textAppearance">@style/TextAppearance.SC.BodyMedium</item>
+        <!-- Lowest-precedence default font for every TextView -->
+        <item name="android:textAppearance">@style/TextAppearance.SC.Body</item>
         <item name="textAppearanceHeadlineMedium">@style/TextAppearance.SC.Headline</item>
-        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.SC.HeadlineSmall</item>
-        <item name="textAppearanceTitleLarge">@style/TextAppearance.SC.TitleLarge</item>
-        <item name="textAppearanceTitleMedium">@style/TextAppearance.SC.TitleMedium</item>
-        <item name="textAppearanceTitleSmall">@style/TextAppearance.SC.TitleSmall</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.SC.Title</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.SC.Title</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.SC.Subtitle</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.SC.Label</item>
         <item name="textAppearanceBodyLarge">@style/TextAppearance.SC.BodyLarge</item>
-        <item name="textAppearanceBodyMedium">@style/TextAppearance.SC.BodyMedium</item>
-        <item name="textAppearanceBodySmall">@style/TextAppearance.SC.BodySmall</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.SC.Body</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.SC.Caption</item>
         <item name="textAppearanceLabelLarge">@style/TextAppearance.SC.Label</item>
         <item name="textAppearanceLabelMedium">@style/TextAppearance.SC.Label</item>
 
@@ -48,169 +53,306 @@
         <item name="materialButtonStyle">@style/Widget.SC.Button</item>
         <item name="textInputStyle">@style/Widget.SC.TextInput</item>
         <item name="snackbarStyle">@style/Widget.SC.Snackbar</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.SC.BottomSheet</item>
 
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+        <item name="android:windowActivityTransitions">true</item>
+
+        <item name="scPatternSize">28dp</item>
     </style>
 
-    <style name="Theme.UnitConverter" parent="Base.Theme.UnitConverter" />
+    <!-- ===================== Moods (day) ===================== -->
+    <style name="Theme.SC.Jantar" parent="Base.Theme.SC">
+        <item name="scMoodName">Jantar Mantar</item>
+        <item name="scBg">@color/jm_bg</item>
+        <item name="scSurface">@color/jm_surface</item>
+        <item name="scSurfaceAlt">@color/jm_surface_alt</item>
+        <item name="scInk">@color/jm_ink</item>
+        <item name="scInkMuted">@color/jm_ink_muted</item>
+        <item name="scInkFaint">@color/jm_ink_faint</item>
+        <item name="scLine">@color/jm_line</item>
+        <item name="scHero">@color/jm_hero</item>
+        <item name="scHeroDeep">@color/jm_hero_deep</item>
+        <item name="scOnHero">@color/jm_on_hero</item>
+        <item name="scOnHeroMuted">@color/jm_on_hero_muted</item>
+        <item name="scGlass">@color/jm_glass</item>
+        <item name="scGlassLine">@color/jm_glass_line</item>
+        <item name="scAccent">@color/jm_accent</item>
+        <item name="scOnAccent">@color/jm_on_accent</item>
+        <item name="scAccentSoft">@color/jm_accent_soft</item>
+        <item name="scHueLength">@color/jm_hue_length</item>
+        <item name="scHueWeight">@color/jm_hue_weight</item>
+        <item name="scHueTemperature">@color/jm_hue_temperature</item>
+        <item name="scHueVolume">@color/jm_hue_volume</item>
+        <item name="scHueArea">@color/jm_hue_area</item>
+        <item name="scHueSpeed">@color/jm_hue_speed</item>
+        <item name="scHueTime">@color/jm_hue_time</item>
+        <item name="scHueStorage">@color/jm_hue_storage</item>
+        <item name="scFontDisplay">@font/rozhaone_regular</item>
+        <item name="scTileShape">@style/ShapeAppearance.SC.Arch</item>
+        <item name="scPattern">@drawable/pattern_jaali</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.SC.Bazaar" parent="Base.Theme.SC">
+        <item name="scMoodName">Bazaar</item>
+        <item name="scBg">@color/bz_bg</item>
+        <item name="scSurface">@color/bz_surface</item>
+        <item name="scSurfaceAlt">@color/bz_surface_alt</item>
+        <item name="scInk">@color/bz_ink</item>
+        <item name="scInkMuted">@color/bz_ink_muted</item>
+        <item name="scInkFaint">@color/bz_ink_faint</item>
+        <item name="scLine">@color/bz_line</item>
+        <item name="scHero">@color/bz_hero</item>
+        <item name="scHeroDeep">@color/bz_hero_deep</item>
+        <item name="scOnHero">@color/bz_on_hero</item>
+        <item name="scOnHeroMuted">@color/bz_on_hero_muted</item>
+        <item name="scGlass">@color/bz_glass</item>
+        <item name="scGlassLine">@color/bz_glass_line</item>
+        <item name="scAccent">@color/bz_accent</item>
+        <item name="scOnAccent">@color/bz_on_accent</item>
+        <item name="scAccentSoft">@color/bz_accent_soft</item>
+        <item name="scHueLength">@color/bz_hue_length</item>
+        <item name="scHueWeight">@color/bz_hue_weight</item>
+        <item name="scHueTemperature">@color/bz_hue_temperature</item>
+        <item name="scHueVolume">@color/bz_hue_volume</item>
+        <item name="scHueArea">@color/bz_hue_area</item>
+        <item name="scHueSpeed">@color/bz_hue_speed</item>
+        <item name="scHueTime">@color/bz_hue_time</item>
+        <item name="scHueStorage">@color/bz_hue_storage</item>
+        <item name="scFontDisplay">@font/martel_extrabold</item>
+        <item name="scTileShape">@style/ShapeAppearance.SC.Stamp</item>
+        <item name="scPattern">@drawable/pattern_buti</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.SC.Truck" parent="Base.Theme.SC">
+        <item name="scMoodName">Truck Art</item>
+        <item name="scBg">@color/tr_bg</item>
+        <item name="scSurface">@color/tr_surface</item>
+        <item name="scSurfaceAlt">@color/tr_surface_alt</item>
+        <item name="scInk">@color/tr_ink</item>
+        <item name="scInkMuted">@color/tr_ink_muted</item>
+        <item name="scInkFaint">@color/tr_ink_faint</item>
+        <item name="scLine">@color/tr_line</item>
+        <item name="scHero">@color/tr_hero</item>
+        <item name="scHeroDeep">@color/tr_hero_deep</item>
+        <item name="scOnHero">@color/tr_on_hero</item>
+        <item name="scOnHeroMuted">@color/tr_on_hero_muted</item>
+        <item name="scGlass">@color/tr_glass</item>
+        <item name="scGlassLine">@color/tr_glass_line</item>
+        <item name="scAccent">@color/tr_accent</item>
+        <item name="scOnAccent">@color/tr_on_accent</item>
+        <item name="scAccentSoft">@color/tr_accent_soft</item>
+        <item name="scHueLength">@color/tr_hue_length</item>
+        <item name="scHueWeight">@color/tr_hue_weight</item>
+        <item name="scHueTemperature">@color/tr_hue_temperature</item>
+        <item name="scHueVolume">@color/tr_hue_volume</item>
+        <item name="scHueArea">@color/tr_hue_area</item>
+        <item name="scHueSpeed">@color/tr_hue_speed</item>
+        <item name="scHueTime">@color/tr_hue_time</item>
+        <item name="scHueStorage">@color/tr_hue_storage</item>
+        <item name="scFontDisplay">@font/yatraone_regular</item>
+        <item name="scTileShape">@style/ShapeAppearance.SC.Plaque</item>
+        <item name="scPattern">@drawable/pattern_truck</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Manifest default and splash -->
+    <style name="Theme.UnitConverter" parent="Theme.SC.Jantar" />
 
     <style name="Theme.UnitConverter.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/paper</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app_logo</item>
-        <item name="windowSplashScreenAnimationDuration">400</item>
+        <item name="windowSplashScreenBackground">@color/jm_hero</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
+        <item name="windowSplashScreenAnimationDuration">600</item>
         <item name="postSplashScreenTheme">@style/Theme.UnitConverter</item>
     </style>
 
-    <!-- ===== Type scale (sp): 13 / 15 / 17 / 20 / 32, readouts 26 / 34 / 56 ===== -->
+    <style name="ThemeOverlay.SC.BottomSheet" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.SC.BottomSheet</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+    <style name="Widget.SC.BottomSheet" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">?attr/scBg</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.SC.Sheet</item>
+    </style>
+
+    <!-- ===================== Shapes ===================== -->
+    <!-- Jharokha arch: tall rounded top, tight base -->
+    <style name="ShapeAppearance.SC.Arch" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">40dp</item>
+        <item name="cornerSizeTopRight">40dp</item>
+        <item name="cornerSizeBottomLeft">12dp</item>
+        <item name="cornerSizeBottomRight">12dp</item>
+    </style>
+    <!-- Printing block: nearly square -->
+    <style name="ShapeAppearance.SC.Stamp" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">6dp</item>
+    </style>
+    <!-- Painted plaque: cut corners -->
+    <style name="ShapeAppearance.SC.Plaque" parent="">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+    <style name="ShapeAppearance.SC.Card" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">22dp</item>
+    </style>
+    <style name="ShapeAppearance.SC.Sheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">28dp</item>
+        <item name="cornerSizeTopRight">28dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+    <style name="ShapeAppearance.SC.Pill" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- ===================== Type ===================== -->
+    <!-- Display face changes with the mood; body is always Mukta. -->
+    <style name="TextAppearance.SC.Display" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="fontFamily">?attr/scFontDisplay</item>
+        <item name="android:fontFamily">?attr/scFontDisplay</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">?attr/scInk</item>
+    </style>
+    <style name="TextAppearance.SC.Readout" parent="TextAppearance.SC.Display">
+        <item name="android:textSize">52sp</item>
+    </style>
     <style name="TextAppearance.SC.Headline" parent="TextAppearance.Material3.HeadlineMedium">
-        <item name="fontFamily">@font/barlow_semibold</item>
-        <item name="android:fontFamily">@font/barlow_semibold</item>
-        <item name="android:textSize">32sp</item>
-        <item name="android:letterSpacing">-0.01</item>
+        <item name="fontFamily">?attr/scFontDisplay</item>
+        <item name="android:fontFamily">?attr/scFontDisplay</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">?attr/scInk</item>
     </style>
-    <style name="TextAppearance.SC.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
-        <item name="fontFamily">@font/barlow_semibold</item>
-        <item name="android:fontFamily">@font/barlow_semibold</item>
+    <style name="TextAppearance.SC.Title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/mukta_bold</item>
+        <item name="android:fontFamily">@font/mukta_bold</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?attr/scInk</item>
     </style>
-    <style name="TextAppearance.SC.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
-        <item name="fontFamily">@font/barlow_semibold</item>
-        <item name="android:fontFamily">@font/barlow_semibold</item>
-        <item name="android:textSize">20sp</item>
-    </style>
-    <style name="TextAppearance.SC.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
-        <item name="fontFamily">@font/barlow_medium</item>
-        <item name="android:fontFamily">@font/barlow_medium</item>
+    <style name="TextAppearance.SC.Subtitle" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">@font/mukta_semibold</item>
+        <item name="android:fontFamily">@font/mukta_semibold</item>
         <item name="android:textSize">17sp</item>
-    </style>
-    <style name="TextAppearance.SC.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
-        <item name="fontFamily">@font/barlow_medium</item>
-        <item name="android:fontFamily">@font/barlow_medium</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">?attr/scInk</item>
     </style>
     <style name="TextAppearance.SC.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
-        <item name="fontFamily">@font/barlow_regular</item>
-        <item name="android:fontFamily">@font/barlow_regular</item>
+        <item name="fontFamily">@font/mukta_regular</item>
+        <item name="android:fontFamily">@font/mukta_regular</item>
         <item name="android:textSize">17sp</item>
     </style>
-    <style name="TextAppearance.SC.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
-        <item name="fontFamily">@font/barlow_regular</item>
-        <item name="android:fontFamily">@font/barlow_regular</item>
+    <style name="TextAppearance.SC.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/mukta_regular</item>
+        <item name="android:fontFamily">@font/mukta_regular</item>
         <item name="android:textSize">15sp</item>
     </style>
-    <style name="TextAppearance.SC.BodySmall" parent="TextAppearance.Material3.BodySmall">
-        <item name="fontFamily">@font/barlow_regular</item>
-        <item name="android:fontFamily">@font/barlow_regular</item>
+    <style name="TextAppearance.SC.Caption" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/mukta_regular</item>
+        <item name="android:fontFamily">@font/mukta_regular</item>
         <item name="android:textSize">13sp</item>
     </style>
     <style name="TextAppearance.SC.Label" parent="TextAppearance.Material3.LabelLarge">
-        <item name="fontFamily">@font/barlow_medium</item>
-        <item name="android:fontFamily">@font/barlow_medium</item>
+        <item name="fontFamily">@font/mukta_semibold</item>
+        <item name="android:fontFamily">@font/mukta_semibold</item>
         <item name="android:textSize">15sp</item>
         <item name="android:letterSpacing">0.01</item>
     </style>
-    <!-- Small label above a field: sentence case, muted. -->
-    <style name="TextAppearance.SC.FieldLabel" parent="TextAppearance.SC.Label">
+    <style name="TextAppearance.SC.Overline" parent="TextAppearance.SC.Label">
         <item name="android:textSize">13sp</item>
-        <item name="android:textColor">@color/text_muted</item>
-    </style>
-    <!-- Numeric readouts -->
-    <style name="TextAppearance.SC.Readout" parent="TextAppearance.Material3.DisplaySmall">
-        <item name="fontFamily">@font/barlow_condensed_semibold</item>
-        <item name="android:fontFamily">@font/barlow_condensed_semibold</item>
-        <item name="android:textSize">56sp</item>
-        <item name="android:letterSpacing">-0.01</item>
-        <item name="android:includeFontPadding">false</item>
-    </style>
-    <style name="TextAppearance.SC.ReadoutSmall" parent="TextAppearance.SC.Readout">
-        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">?attr/scInkMuted</item>
     </style>
 
-    <style name="ShapeAppearance.SC.Tile" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/corner_tile</item>
-    </style>
-
-    <!-- ===== Widgets ===== -->
+    <!-- ===================== Widgets ===================== -->
     <style name="Widget.SC.Toolbar" parent="Widget.Material3.Toolbar">
         <item name="android:background">@android:color/transparent</item>
-        <item name="titleTextAppearance">@style/TextAppearance.SC.TitleLarge</item>
-        <item name="titleTextColor">@color/text_strong</item>
-        <item name="navigationIconTint">@color/text_strong</item>
+        <item name="titleTextAppearance">@style/TextAppearance.SC.Title</item>
+        <item name="titleTextColor">?attr/scInk</item>
+        <item name="navigationIconTint">?attr/scInk</item>
     </style>
 
-    <!-- Flat tiles: hairline outline, small radius, no shadow. -->
-    <style name="Widget.SC.Card" parent="Widget.Material3.CardView.Outlined">
-        <item name="cardBackgroundColor">@color/surface</item>
-        <item name="cardCornerRadius">@dimen/corner_tile</item>
+    <style name="Widget.SC.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">?attr/scSurface</item>
         <item name="cardElevation">0dp</item>
-        <item name="strokeColor">@color/rule</item>
+        <item name="strokeColor">?attr/scLine</item>
         <item name="strokeWidth">1dp</item>
-        <item name="rippleColor">@color/ripple</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.SC.Card</item>
     </style>
 
     <style name="Widget.SC.Button" parent="Widget.Material3.Button">
-        <item name="cornerRadius">@dimen/corner_tile</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:minHeight">52dp</item>
-        <item name="backgroundTint">@color/text_strong</item>
-        <item name="android:textColor">@color/paper</item>
+        <item name="android:minHeight">54dp</item>
+        <item name="backgroundTint">?attr/scAccent</item>
+        <item name="android:textColor">?attr/scOnAccent</item>
+        <item name="iconTint">?attr/scOnAccent</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.SC.Pill</item>
         <item name="android:textAppearance">@style/TextAppearance.SC.Label</item>
     </style>
-    <style name="Widget.SC.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="cornerRadius">@dimen/corner_tile</item>
+    <style name="Widget.SC.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
         <item name="android:textAllCaps">false</item>
-        <item name="android:minHeight">52dp</item>
-        <item name="strokeColor">@color/rule</item>
-        <item name="android:textColor">@color/text_strong</item>
-        <item name="iconTint">@color/text_strong</item>
-        <item name="rippleColor">@color/ripple</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="backgroundTint">?attr/scSurfaceAlt</item>
+        <item name="android:textColor">?attr/scInk</item>
+        <item name="iconTint">?attr/scInk</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.SC.Pill</item>
         <item name="android:textAppearance">@style/TextAppearance.SC.Label</item>
     </style>
     <style name="Widget.SC.Button.Text" parent="Widget.Material3.Button.TextButton">
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/text_strong</item>
-        <item name="iconTint">@color/text_strong</item>
-        <item name="rippleColor">@color/ripple</item>
+        <item name="android:textColor">?attr/scInk</item>
+        <item name="iconTint">?attr/scInk</item>
         <item name="android:textAppearance">@style/TextAppearance.SC.Label</item>
     </style>
-    <!-- Round swap knob between the two fields. -->
-    <style name="Widget.SC.SwapKnob" parent="Widget.Material3.Button.IconButton.Outlined">
+    <!-- Round glass icon button for hero bars -->
+    <style name="Widget.SC.GlassIcon" parent="Widget.Material3.Button.IconButton.Filled">
+        <item name="backgroundTint">?attr/scGlass</item>
+        <item name="iconTint">?attr/scOnHero</item>
+        <item name="strokeColor">?attr/scGlassLine</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="iconSize">22dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
-        <item name="cornerRadius">26dp</item>
-        <item name="strokeColor">@color/rule</item>
-        <item name="backgroundTint">@color/surface</item>
-        <item name="iconTint">@color/text_strong</item>
-        <item name="iconSize">24dp</item>
-        <item name="iconPadding">0dp</item>
-        <item name="android:padding">14dp</item>
-        <item name="rippleColor">@color/ripple</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
     </style>
-    <!-- Small icon action on the tape (copy). -->
-    <style name="Widget.SC.TapeIcon" parent="Widget.Material3.Button.IconButton">
-        <item name="iconTint">@color/on_tape</item>
-        <item name="rippleColor">#331C2A33</item>
+    <!-- Plain icon on surfaces -->
+    <style name="Widget.SC.Icon" parent="Widget.Material3.Button.IconButton">
+        <item name="iconTint">?attr/scInk</item>
     </style>
 
     <style name="Widget.SC.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="boxCornerRadiusTopStart">@dimen/corner_tile</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/corner_tile</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/corner_tile</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/corner_tile</item>
-        <item name="boxStrokeColor">@color/text_strong</item>
-        <item name="boxBackgroundColor">@color/surface</item>
-        <item name="hintTextColor">@color/text_muted</item>
-        <item name="android:textColorHint">@color/text_faint</item>
-        <item name="endIconTint">@color/text_muted</item>
-        <item name="startIconTint">@color/text_muted</item>
+        <item name="boxCornerRadiusTopStart">18dp</item>
+        <item name="boxCornerRadiusTopEnd">18dp</item>
+        <item name="boxCornerRadiusBottomStart">18dp</item>
+        <item name="boxCornerRadiusBottomEnd">18dp</item>
+        <item name="boxStrokeColor">?attr/scAccent</item>
+        <item name="boxBackgroundColor">?attr/scSurface</item>
+        <item name="hintTextColor">?attr/scInkMuted</item>
+        <item name="android:textColorHint">?attr/scInkFaint</item>
+        <item name="endIconTint">?attr/scInkMuted</item>
+        <item name="startIconTint">?attr/scInkMuted</item>
     </style>
 
     <style name="Widget.SC.Snackbar" parent="Widget.Material3.Snackbar">
-        <item name="backgroundTint">@color/text_strong</item>
+        <item name="backgroundTint">?attr/scInk</item>
+    </style>
+
+    <style name="Widget.SC.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_bg</item>
+        <item name="android:textColor">@color/chip_text</item>
+        <item name="chipStrokeWidth">0dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.SC.Label</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.SC.Pill</item>
+        <item name="chipMinHeight">40dp</item>
     </style>
 </resources>

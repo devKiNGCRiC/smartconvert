@@ -1,34 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
-        "Tape measure" palette.
-        Drafting-paper neutrals, slate ink, and one accent: tape-measure yellow.
-        Night values live in values-night/colors.xml under the same names.
+        SmartConvert palettes: three moods, each with day and night.
+        Themes map these onto the sc* tokens (values/attrs.xml); layouts never
+        reference these names directly.
+
+        Category hues are chosen so white display text on them is >= 3:1.
     -->
-    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
 
-    <!-- Neutrals -->
-    <color name="paper">#EEF1EF</color>          <!-- screen background -->
-    <color name="surface">#F9FBFA</color>        <!-- tiles, fields, lists -->
-    <color name="surface_sunk">#E3E8E6</color>   <!-- pressed / inset -->
-    <color name="rule">#CCD5D3</color>           <!-- hairlines and outlines -->
+    <!-- ========== Jantar Mantar: Jaipur sandstone, indigo night, saffron ========== -->
+    <color name="jm_bg">#F6E7E1</color>
+    <color name="jm_surface">#FFF9F6</color>
+    <color name="jm_surface_alt">#F0D9D0</color>
+    <color name="jm_ink">#2A1E3F</color>
+    <color name="jm_ink_muted">#665470</color>
+    <color name="jm_ink_faint">#9C8996</color>
+    <color name="jm_line">#E6CBC1</color>
+    <color name="jm_hero">#1F2A5C</color>
+    <color name="jm_hero_deep">#131A3D</color>
+    <color name="jm_on_hero">#FCEFE9</color>
+    <color name="jm_on_hero_muted">#B6BCE0</color>
+    <color name="jm_glass">#26FFFFFF</color>
+    <color name="jm_glass_line">#40FFFFFF</color>
+    <color name="jm_accent">#E8792B</color>
+    <color name="jm_on_accent">#2A1306</color>
+    <color name="jm_accent_soft">#FBDCC6</color>
+    <color name="jm_hue_length">#C2604F</color>
+    <color name="jm_hue_weight">#A8730E</color>
+    <color name="jm_hue_temperature">#B93A3C</color>
+    <color name="jm_hue_volume">#2F7699</color>
+    <color name="jm_hue_area">#4F7F4B</color>
+    <color name="jm_hue_speed">#7A55A6</color>
+    <color name="jm_hue_time">#2F4C8A</color>
+    <color name="jm_hue_storage">#23807A</color>
 
-    <!-- Text -->
-    <color name="text_strong">#1C2A33</color>
-    <color name="text_muted">#56656E</color>
-    <color name="text_faint">#86939A</color>
+    <color name="jm_bg_night">#121631</color>
+    <color name="jm_surface_night">#1C2146</color>
+    <color name="jm_surface_alt_night">#272D58</color>
+    <color name="jm_ink_night">#F7E8E1</color>
+    <color name="jm_ink_muted_night">#C4B7C9</color>
+    <color name="jm_ink_faint_night">#8A82A3</color>
+    <color name="jm_line_night">#333A6B</color>
+    <color name="jm_hero_night">#0C0F27</color>
+    <color name="jm_hero_deep_night">#070919</color>
+    <color name="jm_accent_night">#F2933F</color>
+    <color name="jm_on_accent_night">#1B0F05</color>
+    <color name="jm_accent_soft_night">#3D2C33</color>
 
-    <!-- Accent -->
-    <color name="tape">#F2C230</color>           <!-- the result tape -->
-    <color name="tape_pressed">#E0AF17</color>
-    <color name="on_tape">#1C2A33</color>        <!-- always dark ink, both themes -->
-    <color name="mark">#A87C00</color>           <!-- favourite star -->
+    <!-- ========== Bazaar: block print on cotton, indigo and madder ========== -->
+    <color name="bz_bg">#F7F3EA</color>
+    <color name="bz_surface">#FFFDF8</color>
+    <color name="bz_surface_alt">#EEE6D6</color>
+    <color name="bz_ink">#1E2A4A</color>
+    <color name="bz_ink_muted">#56607D</color>
+    <color name="bz_ink_faint">#979DB0</color>
+    <color name="bz_line">#E2D8C5</color>
+    <color name="bz_hero">#23376B</color>
+    <color name="bz_hero_deep">#172550</color>
+    <color name="bz_on_hero">#F7F3EA</color>
+    <color name="bz_on_hero_muted">#B9C3E0</color>
+    <color name="bz_glass">#24FFFFFF</color>
+    <color name="bz_glass_line">#3DFFFFFF</color>
+    <color name="bz_accent">#B5332E</color>
+    <color name="bz_on_accent">#FFFFFF</color>
+    <color name="bz_accent_soft">#F3D6CF</color>
+    <color name="bz_hue_length">#B5332E</color>
+    <color name="bz_hue_weight">#9A6B0C</color>
+    <color name="bz_hue_temperature">#8E2C4F</color>
+    <color name="bz_hue_volume">#23376B</color>
+    <color name="bz_hue_area">#4F6B2E</color>
+    <color name="bz_hue_speed">#7A4E2D</color>
+    <color name="bz_hue_time">#3B3A3A</color>
+    <color name="bz_hue_storage">#1F6F6B</color>
 
-    <color name="danger">#B3261E</color>
-    <color name="ripple">#1F1C2A33</color>
+    <color name="bz_bg_night">#0F1830</color>
+    <color name="bz_surface_night">#172347</color>
+    <color name="bz_surface_alt_night">#20305E</color>
+    <color name="bz_ink_night">#F3EDE0</color>
+    <color name="bz_ink_muted_night">#B8BED3</color>
+    <color name="bz_ink_faint_night">#7F87A4</color>
+    <color name="bz_line_night">#2B3A6A</color>
+    <color name="bz_hero_night">#0A1126</color>
+    <color name="bz_hero_deep_night">#060B1A</color>
+    <color name="bz_accent_night">#E0605A</color>
+    <color name="bz_on_accent_night">#1A0605</color>
+    <color name="bz_accent_soft_night">#3A2234</color>
 
-    <!-- Material role aliases -->
-    <color name="primary">@color/text_strong</color>
-    <color name="error">@color/danger</color>
+    <!-- ========== Truck Art: marigold, truck teal, hot pink ========== -->
+    <color name="tr_bg">#FFF2CF</color>
+    <color name="tr_surface">#FFFBEE</color>
+    <color name="tr_surface_alt">#FFE3A0</color>
+    <color name="tr_ink">#1A1033</color>
+    <color name="tr_ink_muted">#4C3D6A</color>
+    <color name="tr_ink_faint">#8B7EA6</color>
+    <color name="tr_line">#F1D48A</color>
+    <color name="tr_hero">#0E6B5C</color>
+    <color name="tr_hero_deep">#084A40</color>
+    <color name="tr_on_hero">#FFF2CF</color>
+    <color name="tr_on_hero_muted">#A9E3D6</color>
+    <color name="tr_glass">#2BFFFFFF</color>
+    <color name="tr_glass_line">#47FFFFFF</color>
+    <color name="tr_accent">#FF2E7E</color>
+    <color name="tr_on_accent">#1A1033</color>
+    <color name="tr_accent_soft">#FFD3E4</color>
+    <color name="tr_hue_length">#D8156A</color>
+    <color name="tr_hue_weight">#3A8A1C</color>
+    <color name="tr_hue_temperature">#C8102E</color>
+    <color name="tr_hue_volume">#0A7AA0</color>
+    <color name="tr_hue_area">#D2540A</color>
+    <color name="tr_hue_speed">#7B2CBF</color>
+    <color name="tr_hue_time">#0E6B5C</color>
+    <color name="tr_hue_storage">#1F4FD1</color>
+
+    <color name="tr_bg_night">#0F0B1C</color>
+    <color name="tr_surface_night">#1B1532</color>
+    <color name="tr_surface_alt_night">#271F45</color>
+    <color name="tr_ink_night">#FFF2CF</color>
+    <color name="tr_ink_muted_night">#CDC1E8</color>
+    <color name="tr_ink_faint_night">#8C80AE</color>
+    <color name="tr_line_night">#30285A</color>
+    <color name="tr_hero_night">#06352E</color>
+    <color name="tr_hero_deep_night">#03231E</color>
+    <color name="tr_accent_night">#FF3D8A</color>
+    <color name="tr_on_accent_night">#1A0610</color>
+    <color name="tr_accent_soft_night">#3F1A38</color>
 </resources>

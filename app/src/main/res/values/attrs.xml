@@ -1,7 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="RulerView">
-        <attr name="rulerColor" format="color" />
-        <attr name="rulerFromBottom" format="boolean" />
+    <!--
+        Theme tokens. Every screen reads colours, fonts, shapes and patterns
+        through these attributes, so a "mood" is just a theme that sets them.
+        See values/themes.xml (day) and values-night/themes.xml (night).
+    -->
+
+    <!-- Surfaces and ink -->
+    <attr name="scBg" format="color" />
+    <attr name="scSurface" format="color" />
+    <attr name="scSurfaceAlt" format="color" />
+    <attr name="scInk" format="color" />
+    <attr name="scInkMuted" format="color" />
+    <attr name="scInkFaint" format="color" />
+    <attr name="scLine" format="color" />
+
+    <!-- Hero band (top of home, history) -->
+    <attr name="scHero" format="color" />
+    <attr name="scHeroDeep" format="color" />
+    <attr name="scOnHero" format="color" />
+    <attr name="scOnHeroMuted" format="color" />
+    <attr name="scGlass" format="color" />
+    <attr name="scGlassLine" format="color" />
+
+    <!-- Accent -->
+    <attr name="scAccent" format="color" />
+    <attr name="scOnAccent" format="color" />
+    <attr name="scAccentSoft" format="color" />
+
+    <!-- One hue per category, all readable with white text at display sizes -->
+    <attr name="scHueLength" format="color" />
+    <attr name="scHueWeight" format="color" />
+    <attr name="scHueTemperature" format="color" />
+    <attr name="scHueVolume" format="color" />
+    <attr name="scHueArea" format="color" />
+    <attr name="scHueSpeed" format="color" />
+    <attr name="scHueTime" format="color" />
+    <attr name="scHueStorage" format="color" />
+
+    <!-- Typography, shape, pattern -->
+    <attr name="scFontDisplay" format="reference" />
+    <attr name="scTileShape" format="reference" />
+    <attr name="scPattern" format="reference" />
+    <attr name="scPatternSize" format="dimension" />
+    <attr name="scMoodName" format="string" />
+
+    <!-- ===== Custom views ===== -->
+    <declare-styleable name="PatternView">
+        <attr name="pattern" format="reference" />
+        <attr name="patternSize" format="dimension" />
+        <attr name="patternTint" format="color" />
+        <attr name="patternAlpha" format="float" />
+        <!-- 0 = fill, 1 = fade towards the bottom, 2 = fade towards the end -->
+        <attr name="patternFade" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ArcDialView">
+        <attr name="dialColor" format="color" />
+        <attr name="dialNeedleColor" format="color" />
+        <attr name="dialTrackColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="SundialView">
+        <attr name="sundialColor" format="color" />
+        <attr name="sundialSunColor" format="color" />
     </declare-styleable>
 </resources>
