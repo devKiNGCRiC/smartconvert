@@ -15,11 +15,17 @@ package com.unitconverter.app.domain.model;
  * - Easier to reason about
  */
 public class Unit {
+
+    /** Which family a unit belongs to; the unit picker groups by this. */
+    public enum MeasureSystem { METRIC, IMPERIAL, INDIAN, OTHER }
+
     private final String name;                // e.g., "Meter", "Kilogram"
     private final String symbol;              // e.g., "m", "kg"
     private final UnitCategory category;      // Which category this unit belongs to
     private final double conversionFactor;    // Multiplier to convert to base unit
     private final double offset;              // Offset for temperature conversions
+    private MeasureSystem system = MeasureSystem.METRIC;
+    private String note = "";                 // e.g. where a regional unit is used
 
     /**
      * Standard constructor for most units (no offset needed).
@@ -86,6 +92,22 @@ public class Unit {
 
     public double getConversionFactor() {
         return conversionFactor;
+    }
+
+    public MeasureSystem getSystem() {
+        return system;
+    }
+
+    /** Extra context shown in the picker, e.g. "Gold and silver" or "UP, Bihar". */
+    public String getNote() {
+        return note;
+    }
+
+    /** Builder-style tagging used by UnitProvider; returns this. */
+    public Unit tag(MeasureSystem system, String note) {
+        this.system = system == null ? MeasureSystem.METRIC : system;
+        this.note = note == null ? "" : note;
+        return this;
     }
 
     public double getOffset() {
