@@ -19,6 +19,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.Chip;
 import com.unitconverter.app.data.database.ConversionHistoryEntity;
 import com.unitconverter.app.presentation.viewmodel.MainViewModel;
+import com.unitconverter.app.domain.model.UnitCategory;
 import com.unitconverter.app.util.NumberFormatter;
 
 import java.util.List;
@@ -96,7 +97,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
         public void bind(ConversionHistoryEntity item) {
             // Category badge
-            categoryChip.setText(item.getCategory());
+            categoryChip.setText(UnitCategory.displayNameOf(item.getCategory()));
 
             // Timestamp - relative time
             CharSequence relativeTime = DateUtils.getRelativeTimeSpanString(
@@ -142,13 +143,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
             if (isFavorite) {
                 favoriteIcon.setImageResource(R.drawable.ic_star_filled);
                 favoriteIcon.setColorFilter(
-                    ContextCompat.getColor(context, R.color.secondary),
+                    ContextCompat.getColor(context, R.color.mark),
                     PorterDuff.Mode.SRC_IN
                 );
             } else {
                 favoriteIcon.setImageResource(R.drawable.ic_star_border);
                 favoriteIcon.setColorFilter(
-                    ContextCompat.getColor(context, R.color.secondary),
+                    ContextCompat.getColor(context, R.color.text_faint),
                     PorterDuff.Mode.SRC_IN
                 );
             }

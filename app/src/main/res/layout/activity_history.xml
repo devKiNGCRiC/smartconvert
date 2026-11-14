@@ -2,87 +2,95 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/historyRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/historyRoot"
-    android:background="?attr/colorSurface"
+    android:background="@color/paper"
     tools:context=".HistoryActivity">
 
-    <!-- App Bar with gradient background -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_background"
-        android:elevation="0dp">
+        android:background="@color/paper"
+        app:elevation="0dp">
 
-        <!-- Toolbar -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:elevation="0dp"
+            app:navigationContentDescription="@string/cd_back_button"
             app:navigationIcon="@drawable/ic_back"
-            app:title="@string/history_title"
-            app:titleTextColor="@android:color/white" />
+            app:title="@string/history_title" />
 
-        <!-- Search Bar -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/searchBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding_standard"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:layout_marginEnd="@dimen/padding_standard"
-            android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/screen_gutter"
+            android:layout_marginEnd="@dimen/screen_gutter"
+            android:layout_marginBottom="4dp"
             android:hint="@string/search_history_hint"
-            app:boxBackgroundColor="@android:color/white"
-            app:boxBackgroundMode="filled"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusTopStart="12dp"
             app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/ic_settings">
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/ic_search">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/searchInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/search_history_hint"
+                android:imeOptions="actionSearch"
                 android:inputType="text"
-                android:maxLines="1" />
-
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.SC.BodyLarge" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- TabLayout for All/Favorites -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:layout_marginStart="@dimen/screen_gutter"
+            android:layout_marginEnd="@dimen/screen_gutter"
             android:background="@android:color/transparent"
-            app:tabIndicatorColor="@android:color/white"
-            app:tabIndicatorHeight="3dp"
-            app:tabSelectedTextColor="@android:color/white"
-            app:tabTextColor="#B3FFFFFF" />
+            app:tabGravity="start"
+            app:tabIndicatorColor="@color/tape"
+            app:tabIndicatorFullWidth="true"
+            app:tabIndicatorHeight="4dp"
+            app:tabMode="scrollable"
+            app:tabPaddingEnd="16dp"
+            app:tabPaddingStart="0dp"
+            app:tabRippleColor="@color/ripple"
+            app:tabSelectedTextColor="@color/text_strong"
+            app:tabTextAppearance="@style/TextAppearance.SC.TitleSmall"
+            app:tabTextColor="@color/text_muted" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/rule" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- ViewPager2 for swipeable tabs -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <!-- Floating Action Button for Clear All -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabClearAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/padding_standard"
+        android:layout_margin="@dimen/screen_gutter"
         android:text="@string/clear_all"
+        android:textAppearance="@style/TextAppearance.SC.Label"
+        android:textColor="@color/danger"
+        app:backgroundTint="@color/surface"
+        app:elevation="2dp"
         app:icon="@drawable/ic_delete"
-        app:backgroundTint="?attr/colorError" />
-
+        app:iconTint="@color/danger"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.SC.Tile"
+        app:strokeColor="@color/rule"
+        app:strokeWidth="1dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

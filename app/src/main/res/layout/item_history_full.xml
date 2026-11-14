@@ -1,81 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- A saved conversion: category and time, then "value unit -> value unit", then actions. -->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/spacing_small"
-    android:layout_marginTop="@dimen/spacing_small"
-    android:layout_marginEnd="@dimen/spacing_small"
+    android:layout_marginBottom="10dp"
     android:clickable="true"
-    android:focusable="true"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="@dimen/elevation_low"
-    app:cardBackgroundColor="?attr/colorSurfaceContainerHighest"
-    app:strokeColor="?attr/colorOutlineVariant"
-    app:strokeWidth="0dp">
+    android:focusable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/padding_standard">
+        android:paddingStart="16dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="4dp">
 
-        <!-- Header: Category + Timestamp + Favorite -->
+        <!-- Category, time, favourite -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <!-- Category Badge -->
             <com.google.android.material.chip.Chip
                 android:id="@+id/categoryChip"
                 style="@style/Widget.Material3.Chip.Assist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:clickable="false"
+                android:focusable="false"
+                android:textAppearance="@style/TextAppearance.SC.BodySmall"
+                android:textColor="@color/text_strong"
+                app:chipBackgroundColor="@color/surface_sunk"
+                app:chipMinHeight="26dp"
+                app:chipStrokeWidth="0dp"
+                app:ensureMinTouchTargetSize="false"
                 tools:text="Length" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
-
-            <!-- Timestamp -->
             <TextView
                 android:id="@+id/timestampText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/spacing_small"
-                android:textAppearance="?attr/textAppearanceBodySmall"
-                android:textColor="?attr/colorOnSurfaceVariant"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:textAppearance="@style/TextAppearance.SC.BodySmall"
+                android:textColor="@color/text_faint"
                 tools:text="2 hours ago" />
 
-            <!-- Favorite Star -->
             <ImageView
                 android:id="@+id/favoriteIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:contentDescription="@string/toggle_favorite"
                 android:focusable="true"
-                android:padding="2dp"
+                android:padding="12dp"
                 android:src="@drawable/ic_star_border"
-                app:tint="?attr/colorPrimary" />
-
+                app:tint="@color/text_faint" />
         </LinearLayout>
 
-        <!-- Conversion Display -->
+        <!-- The conversion -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="12dp"
+            android:baselineAligned="false"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <!-- Input Value + Unit -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -86,9 +83,9 @@
                     android:id="@+id/inputValueText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?attr/textAppearanceTitleLarge"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.SC.ReadoutSmall"
+                    android:textColor="@color/text_muted"
                     tools:text="100" />
 
                 <TextView
@@ -96,23 +93,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    tools:text="Centimeters" />
-
+                    android:textAppearance="@style/TextAppearance.SC.BodyMedium"
+                    android:textColor="@color/text_muted"
+                    tools:text="Centimeter" />
             </LinearLayout>
 
-            <!-- Arrow Icon -->
             <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="@dimen/spacing_small"
-                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:contentDescription="@string/converts_to"
                 android:src="@drawable/ic_arrow_forward"
-                app:tint="?attr/colorPrimary" />
+                app:tint="@color/text_faint" />
 
-            <!-- Result Value + Unit -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -124,10 +118,9 @@
                     android:id="@+id/resultValueText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="textEnd"
-                    android:textAppearance="?attr/textAppearanceTitleLarge"
-                    android:textColor="?attr/colorPrimary"
-                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.SC.ReadoutSmall"
+                    android:textColor="@color/text_strong"
                     tools:text="39.37" />
 
                 <TextView
@@ -135,46 +128,39 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:textAlignment="textEnd"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    tools:text="Inches" />
-
+                    android:textAppearance="@style/TextAppearance.SC.BodyMedium"
+                    android:textColor="@color/text_muted"
+                    tools:text="Inch" />
             </LinearLayout>
-
         </LinearLayout>
 
-        <!-- Action Buttons -->
+        <!-- Actions -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginTop="4dp"
             android:gravity="end"
             android:orientation="horizontal">
 
-            <!-- Reuse Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/deleteButton"
+                style="@style/Widget.SC.Button.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete"
+                android:textColor="@color/danger"
+                app:icon="@drawable/ic_delete"
+                app:iconSize="18dp"
+                app:iconTint="@color/danger" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/reuseButton"
-                style="@style/Widget.Material3.Button.TextButton"
+                style="@style/Widget.SC.Button.Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/reuse"
-                app:icon="@drawable/ic_refresh" />
-
-            <!-- Delete Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/deleteButton"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_small"
-                android:text="@string/delete"
-                android:textColor="?attr/colorError"
-                app:icon="@drawable/ic_delete"
-                app:iconTint="?attr/colorError" />
-
+                app:icon="@drawable/ic_refresh"
+                app:iconSize="18dp" />
         </LinearLayout>
-
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>
