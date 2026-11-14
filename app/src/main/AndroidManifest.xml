@@ -29,7 +29,7 @@
             android:name=".ConversionActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize|stateVisible" />
         
         <!-- History & Favorites Activity -->
         <activity

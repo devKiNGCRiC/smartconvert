@@ -1,5 +1,8 @@
 package com.unitconverter.app;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.unitconverter.app.domain.model.Unit;
 import com.unitconverter.app.domain.model.UnitCategory;
 import com.unitconverter.app.presentation.viewmodel.ConversionViewModel;
+import com.unitconverter.app.presentation.widget.RulerView;
 import com.unitconverter.app.util.WindowInsetsHelper;
 
 import java.math.BigDecimal;
@@ -63,6 +67,11 @@ public class ConversionActivity extends AppCompatActivity {
     private TextView resultUnit;
     private Button swapButton;
     private Button clearButton;
+    private View copyButton;
+    private RulerView tapeRuler;
+
+    // Last shown output, used to slide the tape left or right when it changes
+    private Double lastOutput = null;
 
     // ViewModel
     private ConversionViewModel viewModel;
@@ -145,6 +154,8 @@ public class ConversionActivity extends AppCompatActivity {
         resultUnit = findViewById(R.id.resultUnit);
         swapButton = findViewById(R.id.swapButton);
         clearButton = findViewById(R.id.clearButton);
+        copyButton = findViewById(R.id.copyButton);
+        tapeRuler = findViewById(R.id.tapeRuler);
     }
 
     /**
@@ -257,13 +268,13 @@ public class ConversionActivity extends AppCompatActivity {
 
         // Observe formatted result
         viewModel.getFormattedResult().observe(this, formatted -> {
-            if (formatted != null && !formatted.isEmpty()) {
-                resultValue.setText(formatted);
-                resultValue.setVisibility(View.VISIBLE);
-            } else {
-                resultValue.setText(R.string.no_result);
-                resultValue.setVisibility(View.VISIBLE);
-            }
+            boolean hasResult = formatted != null && !formatted.isEmpty();
+            // Empty state: a faint zero on the tape rather than a sentence in display type
+            resultValue.setText(hasResult ? formatted : getString(R.string.result_placeholder));
+            resultValue.setAlpha(hasResult ? 1f : 0.35f);
+            resultValue.setContentDescription(hasResult ? null : getString(R.string.no_result));
+            copyButton.setEnabled(hasResult);
+            copyButton.setAlpha(hasResult ? 1f : 0.35f);
         });
 
         // Observe result to show unit symbol
@@ -271,8 +282,15 @@ public class ConversionActivity extends AppCompatActivity {
             if (result != null) {
                 resultUnit.setText(result.getToUnit().getDisplayText());
                 resultUnit.setVisibility(View.VISIBLE);
+                // Pull the tape out (or reel it in) as the number grows or shrinks
+                double out = result.getOutputValue();
+                if (lastOutput != null && out != lastOutput) {
+                    tapeRuler.nudge(out > lastOutput ? -5 : 5);
+                }
+                lastOutput = out;
             } else {
-                resultUnit.setVisibility(View.GONE);
+                resultUnit.setVisibility(View.INVISIBLE);
+                lastOutput = null;
             }
         });
 
@@ -317,10 +335,10 @@ public class ConversionActivity extends AppCompatActivity {
         // Create adapters
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_spinner_item,
+                R.layout.item_spinner_selected,
                 unitNames
         );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
 
         // Set adapters
         fromUnitSpinner.setAdapter(adapter);
@@ -421,11 +439,29 @@ public class ConversionActivity extends AppCompatActivity {
         // Swap button
         swapButton.setOnClickListener(v -> viewModel.swapUnits());
 
+        // Copy button: puts "value unit-symbol" on the clipboard
+        copyButton.setOnClickListener(v -> copyResult());
+
         // Clear button
         clearButton.setOnClickListener(v -> {
             viewModel.clear();
             inputValue.setText("");
             inputValue.clearFocus();
         });
+    }
+
+    /** Copies the current result, e.g. "4,101.05 ft", to the clipboard. */
+    private void copyResult() {
+        com.unitconverter.app.domain.model.ConversionResult result = viewModel.getResult().getValue();
+        CharSequence value = resultValue.getText();
+        if (result == null || value == null || value.length() == 0) return;
+
+        String text = value + " " + result.getToUnit().getSymbol();
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        if (clipboard != null) {
+            clipboard.setPrimaryClip(ClipData.newPlainText(getString(R.string.result_label), text));
+            Snackbar.make(findViewById(android.R.id.content),
+                    getString(R.string.result_copied, text), Snackbar.LENGTH_SHORT).show();
+        }
     }
 }
