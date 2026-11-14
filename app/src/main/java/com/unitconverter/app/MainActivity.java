@@ -1,18 +1,27 @@
 package com.unitconverter.app;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.SystemBarStyle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
 import androidx.core.splashscreen.SplashScreen;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.core.widget.TextViewCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,339 +29,252 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
 import com.unitconverter.app.data.database.ConversionHistoryEntity;
 import com.unitconverter.app.domain.model.UnitCategory;
 import com.unitconverter.app.presentation.adapter.CategoryAdapter;
 import com.unitconverter.app.presentation.adapter.RecentConversionsAdapter;
+import com.unitconverter.app.presentation.sheet.SettingsSheet;
 import com.unitconverter.app.presentation.viewmodel.MainViewModel;
+import com.unitconverter.app.settings.AppSettings;
+import com.unitconverter.app.settings.ThemeManager;
+import com.unitconverter.app.util.Greetings;
+import com.unitconverter.app.util.WindowInsetsHelper;
+
+import java.util.Calendar;
+import java.util.List;
 
 /**
- * Main Activity - Enhanced Category Selection Screen
- * 
- * MODERN FEATURES ADDED:
- * - Android 12+ Splash Screen API
- * - Smooth entrance animations
- * - Edge-to-edge display
- * - Enhanced Material Design 3 styling
- * 
- * TEACHING NOTE: Activity in MVVM Architecture
- * 
- * Activity's Responsibilities:
- * ✓ Inflate layout and find views
- * ✓ Observe ViewModel LiveData
- * ✓ Update UI based on data changes
- * ✓ Handle user interactions (clicks)
- * ✓ Navigate to other screens
- * ✗ NO business logic here!
- * ✗ NO direct data manipulation!
- * 
- * MVVM Flow:
- * 1. User clicks → Activity tells ViewModel
- * 2. ViewModel processes → Updates LiveData
- * 3. LiveData changes → Activity observes → Updates UI
- * 
- * Benefits:
- * - Testable: ViewModel can be tested without Android framework
- * - Maintainable: Clear separation of concerns
- * - Lifecycle-aware: Survives configuration changes
- * 
- * Design Patterns:
- * - MVVM: Separation of UI and business logic
- * - Observer: Activity observes ViewModel
- * - Dependency Injection: ViewModel provided by ViewModelProvider
+ * Home screen.
+ *
+ * Hero: a sundial showing the real time, a greeting that cycles through
+ * hellos from around the world and settles on the viewer's own, and a
+ * measurement fact of the day. Below: the bento category grid (tiles grow
+ * into the conversion screen) and recent conversions as tickets.
  */
-public class MainActivity extends AppCompatActivity implements 
+public class MainActivity extends AppCompatActivity implements
         CategoryAdapter.OnCategoryClickListener,
-        RecentConversionsAdapter.OnConversionClickListener {
+        RecentConversionsAdapter.OnConversionClickListener,
+        SettingsSheet.Host {
 
-    // UI Components
+    static final String TRANSITION_NAME = "category_container";
+
     private RecyclerView categoriesRecyclerView;
-    private RecyclerView recentConversionsRecyclerView;
     private LinearLayout recentConversionsSection;
-    private MaterialButton viewAllHistoryButton;
     private ProgressBar progressBar;
     private TextView emptyStateText;
-    
-    // ViewModel - survives configuration changes
+    private TextSwitcher greeting;
+    private TextView greetingSub;
+
     private MainViewModel viewModel;
-    
-    // Adapters
+    private AppSettings settings;
     private CategoryAdapter adapter;
     private RecentConversionsAdapter recentAdapter;
+    private boolean firstShow;
 
-    /**
-     * onCreate is called when Activity is created.
-     * 
-     * TEACHING NOTE: Activity Lifecycle
-     * onCreate → onStart → onResume → [RUNNING] → onPause → onStop → onDestroy
-     * 
-     * onCreate:
-     * - Called once when Activity is first created
-     * - Initialize UI, get ViewModel, set up observers
-     * - Don't do heavy work here (slow startup)
-     * 
-     * @param savedInstanceState Saved state from previous instance (null if first time)
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Install Splash Screen (Android 12+)
-        // TEACHING NOTE: Must be called before super.onCreate()
-        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
-        
+        SplashScreen.installSplashScreen(this);
+        ThemeManager.apply(this);
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+        setExitSharedElementCallback(new MaterialContainerTransformSharedElementCallback());
+        getWindow().setSharedElementsUseOverlay(false);
         super.onCreate(savedInstanceState);
-        
-        // Enable edge-to-edge display (modern Android UI)
-        EdgeToEdge.enable(this);
-        
-        // Inflate layout
+
+        // Light status-bar icons: they sit on the dark hero in every mood
+        EdgeToEdge.enable(this, SystemBarStyle.dark(Color.TRANSPARENT));
         setContentView(R.layout.activity_main);
-        
-        // Handle system bars insets for edge-to-edge
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        
-        // Initialize views
+        View scrim = findViewById(R.id.statusScrim);
+        WindowInsetsHelper.applyHeroInsets(findViewById(R.id.main), findViewById(R.id.heroContent), scrim);
+        View hero = findViewById(R.id.hero);
+        ((androidx.core.widget.NestedScrollView) findViewById(R.id.homeScroll)).setOnScrollChangeListener(
+                (androidx.core.widget.NestedScrollView.OnScrollChangeListener) (v, x, y, ox, oy) -> {
+                    // Fade the status-bar backing in over the last 48dp of the hero
+                    float fadeStart = hero.getHeight() - scrim.getHeight() - 48 * getResources().getDisplayMetrics().density;
+                    float t = (y - fadeStart) / (48 * getResources().getDisplayMetrics().density);
+                    scrim.setAlpha(Math.max(0f, Math.min(1f, t)));
+                });
+
+        settings = AppSettings.of(this);
+        firstShow = savedInstanceState == null;
+
         initializeViews();
-        
-        // Get or create ViewModel
-        // TEACHING NOTE: ViewModelProvider ensures same instance across config changes
+        setupHero();
+        setupCategoryGrid();
+
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        
-        // Set up RecyclerView
-        setupRecyclerView();
-        
-        // Observe ViewModel LiveData
         observeViewModel();
+
+        ThemeManager.playPendingReveal(this);
     }
 
-    /**
-     * Finds and caches all view references.
-     * 
-     * TEACHING NOTE: findViewById
-     * - Traverses view hierarchy to find view by ID
-     * - Slow operation, so cache the result
-     * - Do this in onCreate, not in loops or frequent methods
-     */
     private void initializeViews() {
         categoriesRecyclerView = findViewById(R.id.categoriesRecyclerView);
-        recentConversionsRecyclerView = findViewById(R.id.recentConversionsRecyclerView);
         recentConversionsSection = findViewById(R.id.recentConversionsSection);
-        viewAllHistoryButton = findViewById(R.id.viewAllHistoryButton);
         progressBar = findViewById(R.id.progressBar);
         emptyStateText = findViewById(R.id.emptyStateText);
-        
-        // Set up recent conversions RecyclerView
-        recentConversionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        greeting = findViewById(R.id.greeting);
+        greetingSub = findViewById(R.id.greetingSub);
+
+        RecyclerView recent = findViewById(R.id.recentConversionsRecyclerView);
+        recent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recentAdapter = new RecentConversionsAdapter(this);
-        recentConversionsRecyclerView.setAdapter(recentAdapter);
-        
-        // Both the header icon and "View all" open the full history
-        View.OnClickListener openHistory = v ->
-                startActivity(new Intent(MainActivity.this, HistoryActivity.class));
-        viewAllHistoryButton.setOnClickListener(openHistory);
+        recent.setAdapter(recentAdapter);
+
+        View.OnClickListener openHistory = v -> startActivity(new Intent(this, HistoryActivity.class));
+        MaterialButton viewAll = findViewById(R.id.viewAllHistoryButton);
+        viewAll.setOnClickListener(openHistory);
         findViewById(R.id.historyButton).setOnClickListener(openHistory);
+        findViewById(R.id.settingsButton).setOnClickListener(v ->
+                new SettingsSheet().show(getSupportFragmentManager(), "settings"));
     }
 
-    /**
-     * Sets up RecyclerView with GridLayoutManager and adapter.
-     * 
-     * TEACHING NOTE: RecyclerView Setup
-     * 1. Create LayoutManager (Grid, Linear, or Staggered)
-     * 2. Create Adapter with data
-     * 3. Set both on RecyclerView
-     * 
-     * GridLayoutManager:
-     * - spanCount: Number of columns
-     * - Automatically handles sizing and positioning
-     */
-    private void setupRecyclerView() {
-        // Create grid layout with 2 columns
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        categoriesRecyclerView.setLayoutManager(layoutManager);
-        
-        // Adapter will be set when data arrives from ViewModel
+    // ------------------------------------------------------------------ hero
+
+    private void setupHero() {
+        greeting.setFactory(() -> {
+            TextView tv = new TextView(this);
+            TextViewCompat.setTextAppearance(tv, R.style.TextAppearance_SC_Display);
+            tv.setTextColor(ThemeManager.color(this, R.attr.scOnHero));
+            tv.setTextSize(46);
+            tv.setGravity(Gravity.START);
+            tv.setMaxLines(1);
+            return tv;
+        });
+        greeting.setInAnimation(slide(true));
+        greeting.setOutAnimation(slide(false));
+
+        boolean indianGreeting = AppSettings.isIndianDevice() || settings.hindiTouches();
+        if (firstShow) {
+            playGreetingIntro(Greetings.intro(indianGreeting));
+        } else {
+            greeting.setCurrentText(Greetings.home(indianGreeting));
+        }
+        bindGreetingSub();
+
+        String[] facts = getResources().getStringArray(R.array.facts);
+        int day = Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
+        ((TextView) findViewById(R.id.factText)).setText(facts[day % facts.length]);
     }
 
-    /**
-     * Observes ViewModel LiveData and updates UI accordingly.
-     * 
-     * TEACHING NOTE: Observer Pattern with LiveData
-     * 
-     * observe(lifecycleOwner, observer)
-     * - lifecycleOwner: Activity (this) - automatically handles lifecycle
-     * - observer: Lambda that receives data updates
-     * 
-     * Benefits:
-     * - Automatic lifecycle management (no memory leaks!)
-     * - Only updates when Activity is active
-     * - No need to manually unsubscribe
-     * 
-     * How it works:
-     * 1. ViewModel updates LiveData
-     * 2. LiveData notifies all active observers
-     * 3. Observer callback runs on main thread
-     * 4. UI updates with new data
-     */
-    private void observeViewModel() {
-        // Observe categories data
-        viewModel.getCategories().observe(this, categories -> {
-            if (categories != null && categories.length > 0) {
-                // Data available - show RecyclerView
-                showCategories(categories);
-            } else {
-                // No data - show empty state
-                showEmptyState();
+    private void bindGreetingSub() {
+        Greetings.DayPart part = Greetings.dayPart();
+        String english = Greetings.english(part);
+        greetingSub.setText(settings.hindiTouches()
+                ? Greetings.hindi(part) + ", " + english.toLowerCase()
+                : english);
+    }
+
+    /** "Namaste" → "Hola" → "Bonjour" … settling on the viewer's own hello. */
+    private void playGreetingIntro(List<String> words) {
+        greeting.setCurrentText(words.get(0));
+        greeting.setContentDescription(words.get(words.size() - 1));
+        for (int i = 1; i < words.size(); i++) {
+            final String w = words.get(i);
+            greeting.postDelayed(() -> greeting.setText(w), 700L + (i - 1) * 520L);
+        }
+    }
+
+    private Animation slide(boolean in) {
+        AnimationSet set = new AnimationSet(true);
+        set.addAnimation(new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0,
+                Animation.RELATIVE_TO_SELF, in ? 0.6f : 0f, Animation.RELATIVE_TO_SELF, in ? 0f : -0.6f));
+        set.addAnimation(new AlphaAnimation(in ? 0f : 1f, in ? 1f : 0f));
+        set.setDuration(320);
+        set.setInterpolator(new DecelerateInterpolator());
+        return set;
+    }
+
+    // ------------------------------------------------------------- categories
+
+    private void setupCategoryGrid() {
+        GridLayoutManager grid = new GridLayoutManager(this, 6);
+        grid.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return CategoryAdapter.spanFor(position);
             }
         });
-        
-        // Observe loading state
-        viewModel.getLoading().observe(this, isLoading -> {
-            // Show/hide progress bar
-            progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+        categoriesRecyclerView.setLayoutManager(grid);
+        adapter = new CategoryAdapter(CategoryAdapter.ORDER, this,
+                settings.showIndianUnits(), firstShow);
+        categoriesRecyclerView.setAdapter(adapter);
+    }
+
+    private void observeViewModel() {
+        viewModel.getLoading().observe(this, isLoading ->
+                progressBar.setVisibility(Boolean.TRUE.equals(isLoading) ? View.VISIBLE : View.GONE));
+
+        viewModel.getCategories().observe(this, categories -> {
+            boolean empty = categories == null || categories.length == 0;
+            emptyStateText.setVisibility(empty ? View.VISIBLE : View.GONE);
+            categoriesRecyclerView.setVisibility(empty ? View.GONE : View.VISIBLE);
         });
-        
-        // Observe errors
+
         viewModel.getError().observe(this, error -> {
             if (error != null && !error.isEmpty()) {
-                // Show error message using Snackbar
-                // TEACHING NOTE: Snackbar vs Toast
-                // Snackbar: Material Design, can have actions, non-intrusive
-                // Toast: Simple, can't be dismissed, no actions
                 Snackbar.make(categoriesRecyclerView, error, Snackbar.LENGTH_LONG)
                         .setAction("Retry", v -> viewModel.refresh())
                         .show();
             }
         });
-        
-        // Observe selected category (for navigation)
-        viewModel.getSelectedCategory().observe(this, category -> {
-            if (category != null) {
-                // Navigate to conversion screen
-                navigateToConversion(category);
-            }
-        });
-        
-        // Observe recent conversions
+
         viewModel.getRecentConversions().observe(this, conversions -> {
-            if (conversions != null && !conversions.isEmpty()) {
-                recentConversionsSection.setVisibility(View.VISIBLE);
-                recentAdapter.setConversions(conversions);
-            } else {
-                recentConversionsSection.setVisibility(View.GONE);
-            }
+            boolean has = conversions != null && !conversions.isEmpty();
+            recentConversionsSection.setVisibility(has ? View.VISIBLE : View.GONE);
+            recentAdapter.setConversions(conversions);
         });
     }
 
-    /**
-     * Displays categories in RecyclerView.
-     * 
-     * @param categories Array of categories to display
-     */
-    private void showCategories(UnitCategory[] categories) {
-        // Hide empty state and progress
-        emptyStateText.setVisibility(View.GONE);
-        progressBar.setVisibility(View.GONE);
-        
-        // Show RecyclerView
-        categoriesRecyclerView.setVisibility(View.VISIBLE);
-        
-        // Create and set adapter
-        adapter = new CategoryAdapter(categories, this);
-        categoriesRecyclerView.setAdapter(adapter);
-    }
-
-    /**
-     * Shows empty state when no categories available.
-     */
-    private void showEmptyState() {
-        categoriesRecyclerView.setVisibility(View.GONE);
-        progressBar.setVisibility(View.GONE);
-        emptyStateText.setVisibility(View.VISIBLE);
-    }
-
-    /**
-     * Handles category click from adapter.
-     * Implements CategoryAdapter.OnCategoryClickListener interface.
-     * 
-     * TEACHING NOTE: Callback Pattern
-     * - Adapter calls this method when item clicked
-     * - Activity delegates to ViewModel
-     * - ViewModel updates selected category LiveData
-     * - Observer triggers navigation
-     * 
-     * Why this flow?
-     * - ViewModel holds UI state (selected category)
-     * - Survives configuration changes
-     * - If phone rotates during navigation, state is preserved
-     * 
-     * @param category The clicked category
-     */
     @Override
-    public void onCategoryClick(UnitCategory category) {
-        // Tell ViewModel about selection
-        viewModel.selectCategory(category);
+    public void onCategoryClick(UnitCategory category, View tile) {
+        Intent intent = new Intent(this, ConversionActivity.class);
+        intent.putExtra("CATEGORY", category.name());
+        // The tile grows into the conversion screen
+        tile.setTransitionName(TRANSITION_NAME);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, tile, TRANSITION_NAME);
+        startActivity(intent, options.toBundle());
+        tile.postDelayed(() -> tile.setTransitionName("tile_" + category.name()), 1000);
     }
-    
+
     @Override
     public void onConversionClick(ConversionHistoryEntity conversion) {
-        // Navigate to conversion screen with this conversion's category
         try {
-            UnitCategory category = UnitCategory.valueOf(conversion.getCategory());
-            navigateToConversion(category);
+            UnitCategory.valueOf(conversion.getCategory());
         } catch (IllegalArgumentException e) {
             Snackbar.make(categoriesRecyclerView, "Invalid category", Snackbar.LENGTH_SHORT).show();
+            return;
         }
-    }
-    
-    @Override
-    public void onFavoriteClick(ConversionHistoryEntity conversion) {
-        // Toggle favorite status
-        viewModel.toggleFavorite(conversion);
-        
-        // Show feedback
-        String message = conversion.isFavorite() ? "Removed from favorites" : "Added to favorites";
-        Snackbar.make(categoriesRecyclerView, message, Snackbar.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Navigates to conversion screen with selected category.
-     * 
-     * TEACHING NOTE: Intent Navigation
-     * - Intent: Message object for communication
-     * - Explicit Intent: Specifies exact target Activity
-     * - putExtra: Passes data to target Activity
-     * 
-     * @param category Selected category
-     */
-    private void navigateToConversion(UnitCategory category) {
         Intent intent = new Intent(this, ConversionActivity.class);
-        
-        // Pass category name as extra
-        // TEACHING NOTE: We pass the enum name, not the object
-        // - Enums are serializable by default
-        // - Enum.name() returns the constant name as String
-        // - Target Activity can recreate enum using valueOf()
-        intent.putExtra("CATEGORY", category.name());
-        
+        intent.putExtra("CATEGORY", conversion.getCategory());
+        intent.putExtra("FROM_UNIT", conversion.getFromUnit());
+        intent.putExtra("TO_UNIT", conversion.getToUnit());
+        intent.putExtra("INPUT_VALUE", conversion.getInputValue());
         startActivity(intent);
     }
 
-    /**
-     * onResume is called when Activity becomes visible and interactive.
-     * Good place to refresh data if needed.
-     * 
-     * TEACHING NOTE: Lifecycle method
-     * - Called after onStart
-     * - Activity is now fully visible and interactive
-     * - Resume animations, refresh data, etc.
-     */
+    @Override
+    public void onFavoriteClick(ConversionHistoryEntity conversion) {
+        viewModel.toggleFavorite(conversion);
+        Snackbar.make(categoriesRecyclerView,
+                conversion.isFavorite() ? R.string.removed_from_favorites : R.string.added_to_favorites,
+                Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDisplaySettingsChanged() {
+        adapter.setShowIndianUnits(settings.showIndianUnits());
+        recentAdapter.notifyDataSetChanged();
+        boolean indianGreeting = AppSettings.isIndianDevice() || settings.hindiTouches();
+        greeting.setText(Greetings.home(indianGreeting));
+        bindGreetingSub();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-        // Could refresh categories here if needed
-        // viewModel.refresh();
+        // Relative times and number style may have changed while away
+        recentAdapter.notifyDataSetChanged();
     }
 }

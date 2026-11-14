@@ -1,44 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Category tile. The unit symbol (m, kg, °C…) is the icon: it tells you
-    what lives inside better than a picture does.
+    Bento tile. Shape comes from the mood (arch, stamp or plaque), colour from
+    the category hue (set in CategoryAdapter). Layers: hue, mood pattern,
+    clay sheen, then content.
 -->
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/categoryCard"
     android:layout_width="match_parent"
-    android:layout_height="112dp"
-    android:layout_margin="5dp"
+    android:layout_height="140dp"
+    android:layout_margin="6dp"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    app:cardElevation="6dp"
+    app:cardPreventCornerOverlap="false"
+    app:rippleColor="#40FFFFFF"
+    app:shapeAppearance="?attr/scTileShape"
+    app:strokeWidth="0dp">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/categoryIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/barlow_condensed_semibold"
-            android:includeFontPadding="false"
-            android:maxLines="1"
-            android:textColor="@color/text_strong"
-            android:textSize="34sp"
-            tools:text="km/h" />
+        <com.unitconverter.app.presentation.widget.PatternView
+            android:id="@+id/tilePattern"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:pattern="?attr/scPattern"
+            app:patternAlpha="0.2"
+            app:patternFade="2"
+            app:patternTint="#FFFFFFFF" />
 
-        <TextView
-            android:id="@+id/categoryName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.SC.TitleMedium"
-            android:textColor="@color/text_muted"
-            tools:text="Speed" />
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tileContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/categoryIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="?attr/scFontDisplay"
+                android:maxLines="1"
+                android:shadowColor="#40000000"
+                android:shadowDy="2"
+                android:shadowRadius="6"
+                android:textColor="#FFFFFFFF"
+                android:textSize="38sp"
+                tools:text="km/h" />
+
+            <Space
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/categoryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.SC.Subtitle"
+                android:textColor="#FFFFFFFF"
+                tools:text="Speed" />
+
+            <TextView
+                android:id="@+id/categoryUnitCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.85"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.SC.Caption"
+                android:textColor="#FFFFFFFF"
+                tools:text="11 units, 4 Indian" />
+        </LinearLayout>
+    </FrameLayout>
 </com.google.android.material.card.MaterialCardView>

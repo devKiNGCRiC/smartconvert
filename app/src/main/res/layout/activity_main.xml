@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Home: pick what you're measuring, then see recent conversions.
-    Categories come first because choosing one is the main job of this screen.
+    Home.
+    1. Hero: real-time sundial, a world greeting that settles on yours, and
+       a glass "measure of the day" fact over the mood pattern.
+    2. Bento grid of categories (clay tiles in the category hue).
+    3. Recent conversions as railway tickets.
 -->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,10 +13,11 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/paper"
+    android:background="?attr/scBg"
     tools:context=".MainActivity">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/homeScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false">
@@ -22,65 +26,142 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingStart="@dimen/screen_gutter"
-            android:paddingEnd="@dimen/screen_gutter"
-            android:paddingTop="8dp"
             android:paddingBottom="32dp">
 
-            <!-- Brand row -->
-            <LinearLayout
+            <!-- ===== Hero ===== -->
+            <FrameLayout
+                android:id="@+id/hero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:background="@drawable/bg_hero"
+                android:clipChildren="true">
 
-                <TextView
-                    android:layout_width="0dp"
+                <com.unitconverter.app.presentation.widget.PatternView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:pattern="?attr/scPattern"
+                    app:patternAlpha="0.16"
+                    app:patternFade="1"
+                    app:patternTint="?attr/scOnHero" />
+
+                <LinearLayout
+                    android:id="@+id/heroContent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/app_name"
-                    android:textAppearance="@style/TextAppearance.SC.Label"
-                    android:textColor="@color/text_muted" />
+                    android:orientation="vertical"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="22dp">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/historyButton"
-                    style="@style/Widget.Material3.Button.IconButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:contentDescription="@string/history_title"
-                    app:icon="@drawable/ic_history"
-                    app:iconTint="@color/text_strong"
-                    app:rippleColor="@color/ripple" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/home_question"
-                android:textAppearance="@style/TextAppearance.SC.Headline"
-                android:textColor="@color/text_strong" />
+                        <com.unitconverter.app.presentation.widget.SundialView
+                            android:id="@+id/sundial"
+                            android:layout_width="96dp"
+                            android:layout_height="56dp"
+                            android:layout_marginStart="-8dp"
+                            app:sundialColor="?attr/scOnHero"
+                            app:sundialSunColor="?attr/scAccent" />
 
-            <com.unitconverter.app.presentation.widget.RulerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="20dp"
-                app:rulerColor="@color/rule"
-                app:rulerFromBottom="true" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1" />
 
-            <!-- Category grid. Items carry 5dp margins; pull the grid out so tile edges align with the gutter. -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/historyButton"
+                            style="@style/Widget.SC.GlassIcon"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="@string/history_title"
+                            app:icon="@drawable/ic_history" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/settingsButton"
+                            style="@style/Widget.SC.GlassIcon"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:contentDescription="@string/open_settings"
+                            app:icon="@drawable/ic_palette" />
+                    </LinearLayout>
+
+                    <TextSwitcher
+                        android:id="@+id/greeting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:accessibilityLiveRegion="none" />
+
+                    <TextView
+                        android:id="@+id/greetingSub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:textAppearance="@style/TextAppearance.SC.Subtitle"
+                        android:textColor="?attr/scOnHeroMuted"
+                        tools:text="शुभ संध्या, good evening" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/home_question"
+                        android:textAppearance="@style/TextAppearance.SC.Title"
+                        android:textColor="?attr/scOnHero"
+                        android:textSize="22sp" />
+
+                    <!-- Glass fact card -->
+                    <LinearLayout
+                        android:id="@+id/factCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:background="@drawable/bg_glass"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/factTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="8dp"
+                            android:text="@string/fact_title"
+                            android:textAppearance="@style/TextAppearance.SC.Label"
+                            android:textColor="?attr/scOnHeroMuted"
+                            app:drawableStartCompat="@drawable/bg_dot"
+                            app:drawableTint="?attr/scAccent" />
+
+                        <TextView
+                            android:id="@+id/factText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:lineSpacingExtra="2sp"
+                            android:textAppearance="@style/TextAppearance.SC.BodyLarge"
+                            android:textColor="?attr/scOnHero"
+                            tools:text="Jaipur's Samrat Yantra is a sundial 27 m tall." />
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- ===== Bento categories ===== -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/categoriesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="-5dp"
-                android:layout_marginEnd="-5dp"
+                android:layout_marginTop="14dp"
+                android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
                 tools:itemCount="8"
-                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_category"
-                tools:spanCount="2" />
+                tools:listitem="@layout/item_category" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -88,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
-                android:indeterminateTint="@color/text_strong"
+                android:indeterminateTint="?attr/scAccent"
                 android:visibility="gone" />
 
             <TextView
@@ -98,16 +179,15 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
                 android:text="@string/empty_categories"
-                android:textAppearance="@style/TextAppearance.SC.BodyMedium"
-                android:textColor="@color/text_muted"
+                android:textColor="?attr/scInkMuted"
                 android:visibility="gone" />
 
-            <!-- Recent conversions (hidden until there is history) -->
+            <!-- ===== Recent tickets ===== -->
             <LinearLayout
                 android:id="@+id/recentConversionsSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="26dp"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:visibility="visible">
@@ -115,41 +195,56 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="8dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/recent_conversions"
-                        android:textAppearance="@style/TextAppearance.SC.TitleLarge"
-                        android:textColor="@color/text_strong" />
+                        android:textAppearance="@style/TextAppearance.SC.Headline"
+                        android:textSize="24sp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/viewAllHistoryButton"
                         style="@style/Widget.SC.Button.Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="-12dp"
                         android:text="@string/view_all" />
                 </LinearLayout>
 
-                <com.google.android.material.card.MaterialCardView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recentConversionsRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recentConversionsRecyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"
-                        tools:itemCount="3"
-                        tools:listitem="@layout/item_recent_conversion" />
-                </com.google.android.material.card.MaterialCardView>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="12dp"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_recent_conversion" />
             </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:text="@string/footer_tagline"
+                android:textAppearance="@style/TextAppearance.SC.Caption"
+                android:textColor="?attr/scInkFaint" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <!-- Status-bar backing in the hero colour; fades in once the hero scrolls away -->
+    <View
+        android:id="@+id/statusScrim"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:alpha="0"
+        android:background="?attr/scHero" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
