@@ -1,55 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- A saved conversion: category and time, then "value unit -> value unit", then actions. -->
+<!--
+    History entry as a railway ticket (TicketDrawable set in HistoryAdapter).
+    Journey on the left, stub on the right with favourite, time and delete.
+    Tap the ticket to reuse the conversion; swipe to delete.
+-->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="12dp"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
 
     <LinearLayout
+        android:id="@+id/ticketBody"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingTop="6dp"
-        android:paddingEnd="4dp"
-        android:paddingBottom="4dp">
+        android:minHeight="128dp"
+        android:orientation="horizontal">
 
-        <!-- Category, time, favourite -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/categoryChip"
-                style="@style/Widget.Material3.Chip.Assist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:focusable="false"
-                android:textAppearance="@style/TextAppearance.SC.BodySmall"
-                android:textColor="@color/text_strong"
-                app:chipBackgroundColor="@color/surface_sunk"
-                app:chipMinHeight="26dp"
-                app:chipStrokeWidth="0dp"
-                app:ensureMinTouchTargetSize="false"
-                tools:text="Length" />
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.76"
+            android:orientation="vertical"
+            android:paddingStart="18dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="14dp">
 
             <TextView
-                android:id="@+id/timestampText"
-                android:layout_width="0dp"
+                android:id="@+id/categoryChip"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.SC.BodySmall"
-                android:textColor="@color/text_faint"
-                tools:text="2 hours ago" />
+                android:drawablePadding="6dp"
+                android:textAppearance="@style/TextAppearance.SC.Overline"
+                tools:text="Length" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:baselineAligned="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/inputValueText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="?attr/scFontDisplay"
+                    android:maxLines="1"
+                    android:textColor="?attr/scInkMuted"
+                    android:textSize="18sp"
+                    tools:text="1,250" />
+
+                <TextView
+                    android:id="@+id/fromUnitText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="?attr/scInkMuted"
+                    tools:text="Kilometer" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:baselineAligned="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/resultValueText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="?attr/scFontDisplay"
+                    android:maxLines="1"
+                    android:textColor="?attr/scInk"
+                    android:textSize="24sp"
+                    tools:text="12,50,000" />
+
+                <TextView
+                    android:id="@+id/toUnitText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.SC.Subtitle"
+                    tools:text="Meter" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.24"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/favoriteIcon"
@@ -61,106 +116,32 @@
                 android:focusable="true"
                 android:padding="12dp"
                 android:src="@drawable/ic_star_border"
-                app:tint="@color/text_faint" />
-        </LinearLayout>
+                app:tint="?attr/scInkFaint" />
 
-        <!-- The conversion -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:baselineAligned="false"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/timestampText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/inputValueText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:textAppearance="@style/TextAppearance.SC.ReadoutSmall"
-                    android:textColor="@color/text_muted"
-                    tools:text="100" />
-
-                <TextView
-                    android:id="@+id/fromUnitText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:textAppearance="@style/TextAppearance.SC.BodyMedium"
-                    android:textColor="@color/text_muted"
-                    tools:text="Centimeter" />
-            </LinearLayout>
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:gravity="center"
+                android:maxLines="2"
+                android:textAppearance="@style/TextAppearance.SC.Caption"
+                android:textColor="?attr/scInkFaint"
+                android:textSize="12sp"
+                tools:text="2 hr. ago" />
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="@string/converts_to"
-                android:src="@drawable/ic_arrow_forward"
-                app:tint="@color/text_faint" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/resultValueText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:textAppearance="@style/TextAppearance.SC.ReadoutSmall"
-                    android:textColor="@color/text_strong"
-                    tools:text="39.37" />
-
-                <TextView
-                    android:id="@+id/toUnitText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:textAppearance="@style/TextAppearance.SC.BodyMedium"
-                    android:textColor="@color/text_muted"
-                    tools:text="Inch" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Actions -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="end"
-            android:orientation="horizontal">
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/deleteButton"
-                style="@style/Widget.SC.Button.Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/delete"
-                android:textColor="@color/danger"
-                app:icon="@drawable/ic_delete"
-                app:iconSize="18dp"
-                app:iconTint="@color/danger" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/reuseButton"
-                style="@style/Widget.SC.Button.Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/reuse"
-                app:icon="@drawable/ic_refresh"
-                app:iconSize="18dp" />
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:contentDescription="@string/delete"
+                android:focusable="true"
+                android:padding="12dp"
+                android:src="@drawable/ic_delete"
+                app:tint="?attr/scInkFaint" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

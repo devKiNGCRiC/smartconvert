@@ -8,7 +8,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import android.graphics.Color;
+
 import androidx.activity.EdgeToEdge;
+import androidx.activity.SystemBarStyle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,6 +31,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.unitconverter.app.data.database.ConversionHistoryEntity;
 import com.unitconverter.app.presentation.viewmodel.MainViewModel;
+import com.unitconverter.app.settings.ThemeManager;
 import com.unitconverter.app.util.WindowInsetsHelper;
 
 import java.util.ArrayList;
@@ -63,10 +67,11 @@ public class HistoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeManager.apply(this);
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        EdgeToEdge.enable(this, SystemBarStyle.dark(Color.TRANSPARENT));
         setContentView(R.layout.activity_history);
-        WindowInsetsHelper.applySystemBarPadding(findViewById(R.id.historyRoot));
+        WindowInsetsHelper.applyHeroInsets(findViewById(R.id.historyRoot), findViewById(R.id.historyHeroContent));
 
         initializeViews();
         setupViewModel();
@@ -93,6 +98,7 @@ public class HistoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false); // big title sits below
         }
         toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
     }

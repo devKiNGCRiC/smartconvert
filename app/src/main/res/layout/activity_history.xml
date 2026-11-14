@@ -1,74 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- History: mood hero with glass search, pill tabs, ticket list. -->
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/historyRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/paper"
+    android:background="?attr/scBg"
     tools:context=".HistoryActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/paper"
+        android:background="@android:color/transparent"
         app:elevation="0dp">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:navigationContentDescription="@string/cd_back_button"
-            app:navigationIcon="@drawable/ic_back"
-            app:title="@string/history_title" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/searchBarLayout"
+        <FrameLayout
+            android:id="@+id/historyHero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_gutter"
-            android:layout_marginEnd="@dimen/screen_gutter"
-            android:layout_marginBottom="4dp"
-            android:hint="@string/search_history_hint"
-            app:endIconMode="clear_text"
-            app:hintEnabled="false"
-            app:startIconDrawable="@drawable/ic_search">
+            android:background="@drawable/bg_hero">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/searchInput"
+            <com.unitconverter.app.presentation.widget.PatternView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:pattern="?attr/scPattern"
+                app:patternAlpha="0.16"
+                app:patternFade="1"
+                app:patternTint="?attr/scOnHero" />
+
+            <LinearLayout
+                android:id="@+id/historyHeroContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/search_history_hint"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textAppearance="@style/TextAppearance.SC.BodyLarge" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:navigationContentDescription="@string/cd_back_button"
+                    app:navigationIcon="@drawable/ic_back"
+                    app:navigationIconTint="?attr/scOnHero"
+                    app:title="" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/history_title"
+                    android:textAppearance="@style/TextAppearance.SC.Display"
+                    android:textColor="?attr/scOnHero" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/searchBarLayout"
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
+                    app:boxBackgroundColor="?attr/scGlass"
+                    app:boxCornerRadiusBottomEnd="18dp"
+                    app:boxCornerRadiusBottomStart="18dp"
+                    app:boxCornerRadiusTopEnd="18dp"
+                    app:boxCornerRadiusTopStart="18dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="?attr/scOnHero"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@drawable/ic_search"
+                    app:startIconTint="?attr/scOnHeroMuted">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/searchInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/search_history_hint"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        android:textAppearance="@style/TextAppearance.SC.BodyLarge"
+                        android:textColor="?attr/scOnHero"
+                        android:textColorHint="?attr/scOnHeroMuted" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </FrameLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="@dimen/screen_gutter"
-            android:layout_marginEnd="@dimen/screen_gutter"
-            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/bg_tabs_track"
             app:tabGravity="start"
-            app:tabIndicatorColor="@color/tape"
+            app:tabIndicator="@drawable/bg_tab_indicator"
+            app:tabIndicatorColor="?attr/scInk"
             app:tabIndicatorFullWidth="true"
-            app:tabIndicatorHeight="4dp"
-            app:tabMode="scrollable"
-            app:tabPaddingEnd="16dp"
-            app:tabPaddingStart="0dp"
-            app:tabRippleColor="@color/ripple"
-            app:tabSelectedTextColor="@color/text_strong"
-            app:tabTextAppearance="@style/TextAppearance.SC.TitleSmall"
-            app:tabTextColor="@color/text_muted" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/rule" />
+            app:tabIndicatorGravity="stretch"
+            app:tabMinWidth="96dp"
+            app:tabMode="fixed"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabSelectedTextColor="?attr/scBg"
+            app:tabTextAppearance="@style/TextAppearance.SC.Label"
+            app:tabTextColor="?attr/scInk" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager2.widget.ViewPager2
@@ -82,15 +125,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/screen_gutter"
+        android:layout_margin="20dp"
         android:text="@string/clear_all"
         android:textAppearance="@style/TextAppearance.SC.Label"
-        android:textColor="@color/danger"
-        app:backgroundTint="@color/surface"
-        app:elevation="2dp"
+        android:textColor="?attr/scOnAccent"
+        app:backgroundTint="?attr/scAccent"
         app:icon="@drawable/ic_delete"
-        app:iconTint="@color/danger"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.SC.Tile"
-        app:strokeColor="@color/rule"
-        app:strokeWidth="1dp" />
+        app:iconTint="?attr/scOnAccent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.SC.Pill" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -3,6 +3,7 @@ package com.unitconverter.app;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,21 +13,23 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.chip.Chip;
 import com.unitconverter.app.data.database.ConversionHistoryEntity;
-import com.unitconverter.app.presentation.viewmodel.MainViewModel;
 import com.unitconverter.app.domain.model.UnitCategory;
+import com.unitconverter.app.presentation.viewmodel.MainViewModel;
+import com.unitconverter.app.presentation.widget.TicketDrawable;
+import com.unitconverter.app.settings.ThemeManager;
 import com.unitconverter.app.util.NumberFormatter;
+import com.unitconverter.app.util.UnitText;
 
 import java.util.List;
 
 /**
- * Adapter for displaying full history items with detailed information.
- * Shows conversion details, category badge, timestamp, favorite toggle, and action buttons.
+ * History entries as railway tickets. Tap a ticket to reuse the conversion,
+ * tap the star to keep it, tap the bin (or swipe) to delete.
  */
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
 
@@ -50,8 +53,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
     @Override
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
-        ConversionHistoryEntity item = historyList.get(position);
-        holder.bind(item);
+        holder.bind(historyList.get(position));
     }
 
     @Override
@@ -71,88 +73,86 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     class HistoryViewHolder extends RecyclerView.ViewHolder {
 
         private final MaterialCardView cardView;
-        private final Chip categoryChip;
+        private final View ticketBody;
+        private final TextView categoryText;
         private final TextView timestampText;
         private final ImageView favoriteIcon;
         private final TextView inputValueText;
         private final TextView fromUnitText;
         private final TextView resultValueText;
         private final TextView toUnitText;
-        private final MaterialButton reuseButton;
-        private final MaterialButton deleteButton;
+        private final View deleteButton;
 
-        public HistoryViewHolder(@NonNull View itemView) {
+        HistoryViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardView);
-            categoryChip = itemView.findViewById(R.id.categoryChip);
+            ticketBody = itemView.findViewById(R.id.ticketBody);
+            categoryText = itemView.findViewById(R.id.categoryChip);
             timestampText = itemView.findViewById(R.id.timestampText);
             favoriteIcon = itemView.findViewById(R.id.favoriteIcon);
             inputValueText = itemView.findViewById(R.id.inputValueText);
             fromUnitText = itemView.findViewById(R.id.fromUnitText);
             resultValueText = itemView.findViewById(R.id.resultValueText);
             toUnitText = itemView.findViewById(R.id.toUnitText);
-            reuseButton = itemView.findViewById(R.id.reuseButton);
             deleteButton = itemView.findViewById(R.id.deleteButton);
         }
 
-        public void bind(ConversionHistoryEntity item) {
-            // Category badge
-            categoryChip.setText(UnitCategory.displayNameOf(item.getCategory()));
+        void bind(ConversionHistoryEntity item) {
+            Context ctx = itemView.getContext();
+            float dp = ctx.getResources().getDisplayMetrics().density;
+            ticketBody.setBackground(new TicketDrawable(
+                    ThemeManager.color(ctx, R.attr.scSurface),
+                    ThemeManager.color(ctx, R.attr.scLine), dp, 0.76f));
 
-            // Timestamp - relative time
-            CharSequence relativeTime = DateUtils.getRelativeTimeSpanString(
-                item.getTimestamp(),
-                System.currentTimeMillis(),
-                DateUtils.MINUTE_IN_MILLIS
-            );
-            timestampText.setText(relativeTime);
+            categoryText.setText(UnitCategory.displayNameOf(item.getCategory()));
+            try {
+                UnitCategory cat = UnitCategory.valueOf(item.getCategory());
+                Drawable dot = ContextCompat.getDrawable(ctx, R.drawable.bg_dot);
+                if (dot != null) {
+                    dot = DrawableCompat.wrap(dot.mutate());
+                    DrawableCompat.setTint(dot, ThemeManager.hue(ctx, cat));
+                    categoryText.setCompoundDrawablesRelativeWithIntrinsicBounds(dot, null, null, null);
+                }
+            } catch (IllegalArgumentException ignored) {
+                categoryText.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null);
+            }
 
-            // Conversion values
-            inputValueText.setText(NumberFormatter.format(item.getInputValue()));
-            fromUnitText.setText(item.getFromUnit());
-            resultValueText.setText(NumberFormatter.format(item.getResultValue()));
-            toUnitText.setText(item.getToUnit());
+            timestampText.setText(DateUtils.getRelativeTimeSpanString(
+                    item.getTimestamp(), System.currentTimeMillis(),
+                    DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE));
 
-            // Favorite icon
+            inputValueText.setText(NumberFormatter.formatDisplay(item.getInputValue()));
+            fromUnitText.setText(UnitText.nameOf(item.getFromUnit()));
+            resultValueText.setText(NumberFormatter.formatDisplay(item.getResultValue()));
+            toUnitText.setText(UnitText.nameOf(item.getToUnit()));
+
             updateFavoriteIcon(item.isFavorite());
             favoriteIcon.setOnClickListener(v -> {
                 viewModel.toggleFavorite(item);
                 updateFavoriteIcon(!item.isFavorite());
             });
 
-            // Reuse button - navigate to ConversionActivity with pre-filled data
-            reuseButton.setOnClickListener(v -> {
-                Intent intent = new Intent(context, ConversionActivity.class);
-                intent.putExtra("CATEGORY", item.getCategory());
-                intent.putExtra("FROM_UNIT", item.getFromUnit());
-                intent.putExtra("TO_UNIT", item.getToUnit());
-                intent.putExtra("INPUT_VALUE", item.getInputValue());
-                context.startActivity(intent);
-            });
+            deleteButton.setOnClickListener(v -> viewModel.deleteHistoryItem(item));
 
-            // Delete button
-            deleteButton.setOnClickListener(v -> {
-                viewModel.deleteHistoryItem(item);
-            });
+            cardView.setContentDescription(item.getDisplayText());
+            cardView.setOnClickListener(v -> reuse(item));
+        }
 
-            // Card click - also navigate to conversion
-            cardView.setOnClickListener(v -> reuseButton.performClick());
+        /** Opens the conversion screen pre-filled with this entry. */
+        private void reuse(ConversionHistoryEntity item) {
+            Intent intent = new Intent(context, ConversionActivity.class);
+            intent.putExtra("CATEGORY", item.getCategory());
+            intent.putExtra("FROM_UNIT", item.getFromUnit());
+            intent.putExtra("TO_UNIT", item.getToUnit());
+            intent.putExtra("INPUT_VALUE", item.getInputValue());
+            context.startActivity(intent);
         }
 
         private void updateFavoriteIcon(boolean isFavorite) {
-            if (isFavorite) {
-                favoriteIcon.setImageResource(R.drawable.ic_star_filled);
-                favoriteIcon.setColorFilter(
-                    ContextCompat.getColor(context, R.color.mark),
-                    PorterDuff.Mode.SRC_IN
-                );
-            } else {
-                favoriteIcon.setImageResource(R.drawable.ic_star_border);
-                favoriteIcon.setColorFilter(
-                    ContextCompat.getColor(context, R.color.text_faint),
-                    PorterDuff.Mode.SRC_IN
-                );
-            }
+            Context ctx = itemView.getContext();
+            favoriteIcon.setImageResource(isFavorite ? R.drawable.ic_star_filled : R.drawable.ic_star_border);
+            favoriteIcon.setColorFilter(ThemeManager.color(ctx,
+                    isFavorite ? R.attr.scAccent : R.attr.scInkFaint), PorterDuff.Mode.SRC_IN);
         }
     }
 }
