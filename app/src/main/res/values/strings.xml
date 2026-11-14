@@ -8,17 +8,17 @@
     <string name="category_selection_title">Choose Category</string>
     
     <!-- Conversion Screen -->
-    <string name="conversion_title">Convert %s</string>
+    <string name="conversion_title">%s</string>
     <string name="input_label">Enter value</string>
     <string name="from_label">From</string>
     <string name="to_label">To</string>
     <string name="result_label">Result</string>
     <string name="convert_button">Convert</string>
     <string name="clear_button">Clear</string>
-    <string name="swap_button">Swap Units</string>
+    <string name="swap_button">Swap units</string>
     
     <!-- Hints and Placeholders -->
-    <string name="input_hint">Enter value to convert</string>
+    <string name="input_hint">Value</string>
     <string name="select_from_unit">Select source unit</string>
     <string name="select_to_unit">Select target unit</string>
     <string name="no_result">Result will appear here</string>
@@ -57,31 +57,31 @@
     <!-- Success Messages -->
     <string name="conversion_successful">Conversion completed</string>
     
-    <string name="auto_convert_hint">Conversion happens automatically as you type</string>
+    <string name="auto_convert_hint">Results update as you type.</string>
 
     <!-- Tooltips -->
     <string name="tooltip_swap">Tap to swap units</string>
     <string name="tooltip_clear">Tap to clear all</string>
     
     <!-- History & Favorites -->
-    <string name="history_title">History &amp; Favorites</string>
-    <string name="tab_all_history">All History</string>
+    <string name="history_title">History</string>
+    <string name="tab_all_history">All</string>
     <string name="tab_favorites">Favorites</string>
-    <string name="search_history_hint">Search conversions…</string>
-    <string name="clear_all">Clear All</string>
-    <string name="clear_favorites">Clear Favorites</string>
+    <string name="search_history_hint">Search history</string>
+    <string name="clear_all">Clear all</string>
+    <string name="clear_favorites">Clear favorites</string>
     <string name="delete">Delete</string>
     <string name="reuse">Reuse</string>
     <string name="toggle_favorite">Toggle favorite</string>
     <string name="converts_to">Converts to</string>
-    <string name="empty_history">No History Yet</string>
-    <string name="empty_history_message">Your conversion history will appear here</string>
-    <string name="no_search_results">No Matches</string>
-    <string name="no_search_results_message">Try a different search</string>
-    <string name="empty_favorites">No Favorites Yet</string>
-    <string name="empty_favorites_message">Star conversions to save them as favorites</string>
-    <string name="recent_conversions">Recent Conversions</string>
-    <string name="view_all">View All</string>
+    <string name="empty_history">No conversions yet</string>
+    <string name="empty_history_message">Convert something and it will be saved here.</string>
+    <string name="no_search_results">No matches</string>
+    <string name="no_search_results_message">Try a unit name or a number.</string>
+    <string name="empty_favorites">No favorites yet</string>
+    <string name="empty_favorites_message">Tap the star on a conversion to keep it here.</string>
+    <string name="recent_conversions">Recent</string>
+    <string name="view_all">View all</string>
     <string name="added_to_favorites">Added to favorites</string>
     <string name="removed_from_favorites">Removed from favorites</string>
     <string name="history_cleared">History cleared</string>
@@ -92,4 +92,10 @@
     <string name="cancel">Cancel</string>
     <string name="item_deleted">Item deleted</string>
     <string name="undo">Undo</string>
+
+    <!-- Redesign -->
+    <string name="home_question">What are you measuring?</string>
+    <string name="copy_result">Copy result</string>
+    <string name="result_copied">Copied %s</string>
+    <string name="result_placeholder">0</string>
 </resources>

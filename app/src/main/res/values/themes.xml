@@ -1,142 +1,216 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- 
-        MODERN MATERIAL DESIGN 3 THEME
-        Enhanced with custom colors, typography, and components
+    <!--
+        One theme for day and night; colours flip through values-night/colors.xml.
+        Typography: Barlow for interface text, Barlow Condensed for numbers.
     -->
-    
-    <!-- Base application theme -->
     <style name="Base.Theme.UnitConverter" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Primary brand color -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/primary_dark</item>
-        <item name="colorOnPrimary">@color/text_on_primary</item>
-        
-        <!-- Secondary brand color -->
-        <item name="colorSecondary">@color/secondary</item>
-        <item name="colorSecondaryVariant">@color/secondary_dark</item>
-        <item name="colorOnSecondary">@color/text_on_secondary</item>
-        
-        <!-- Tertiary accent color -->
-        <item name="colorTertiary">@color/tertiary</item>
-        <item name="colorTertiaryContainer">@color/tertiary_light</item>
-        <item name="colorOnTertiary">@color/white</item>
-        
-        <!-- Surface colors -->
+        <item name="colorPrimary">@color/text_strong</item>
+        <item name="colorOnPrimary">@color/paper</item>
+        <item name="colorPrimaryContainer">@color/tape</item>
+        <item name="colorOnPrimaryContainer">@color/on_tape</item>
+        <item name="colorSecondary">@color/tape</item>
+        <item name="colorOnSecondary">@color/on_tape</item>
+        <item name="colorSecondaryContainer">@color/surface_sunk</item>
+        <item name="colorOnSecondaryContainer">@color/text_strong</item>
+        <item name="colorTertiary">@color/mark</item>
+
+        <item name="android:colorBackground">@color/paper</item>
+        <item name="colorOnBackground">@color/text_strong</item>
         <item name="colorSurface">@color/surface</item>
-        <item name="colorSurfaceVariant">@color/surface_variant</item>
-        <item name="colorOnSurface">@color/text_primary_light</item>
-        <item name="colorOnSurfaceVariant">@color/text_secondary_light</item>
-        
-        <!-- Background colors -->
-        <item name="android:colorBackground">@color/background_light</item>
-        <item name="colorOnBackground">@color/text_primary_light</item>
-        
-        <!-- Status bar -->
-        <item name="android:statusBarColor">@color/background_light</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-        
-        <!-- Navigation bar -->
-        <item name="android:navigationBarColor">@color/background_light</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
-        
-        <!-- Semantic colors -->
-        <item name="colorError">@color/error</item>
-        <item name="colorOnError">@color/white</item>
-        
-        <!-- Shape appearance -->
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.UnitConverter.SmallComponent</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.UnitConverter.MediumComponent</item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.UnitConverter.LargeComponent</item>
-        
-        <!-- Text appearances -->
-        <item name="textAppearanceHeadline1">@style/TextAppearance.UnitConverter.Headline1</item>
-        <item name="textAppearanceHeadline2">@style/TextAppearance.UnitConverter.Headline2</item>
-        <item name="textAppearanceBody1">@style/TextAppearance.UnitConverter.Body1</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.UnitConverter.Body2</item>
-        
-        <!-- Material components -->
-        <item name="materialCardViewStyle">@style/Widget.UnitConverter.CardView</item>
-        <item name="materialButtonStyle">@style/Widget.UnitConverter.Button</item>
-        <item name="textInputStyle">@style/Widget.UnitConverter.TextInputLayout</item>
-        
-        <!-- Edge to edge -->
+        <item name="colorOnSurface">@color/text_strong</item>
+        <item name="colorSurfaceVariant">@color/surface_sunk</item>
+        <item name="colorOnSurfaceVariant">@color/text_muted</item>
+        <item name="colorOutline">@color/rule</item>
+        <item name="colorOutlineVariant">@color/rule</item>
+        <item name="colorError">@color/danger</item>
+        <item name="colorOnError">@color/paper</item>
+        <item name="colorControlHighlight">@color/ripple</item>
+        <item name="android:textColorHighlight">@color/tape</item>
+        <item name="android:windowBackground">@color/paper</item>
+
+        <!-- Default font via the theme's textAppearance (lowest precedence).
+             Setting fontFamily on the theme itself would override every
+             textAppearance font in the app. -->
+        <item name="android:textAppearance">@style/TextAppearance.SC.BodyMedium</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.SC.Headline</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.SC.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.SC.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.SC.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.SC.TitleSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.SC.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.SC.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.SC.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.SC.Label</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.SC.Label</item>
+
+        <item name="toolbarStyle">@style/Widget.SC.Toolbar</item>
+        <item name="materialCardViewStyle">@style/Widget.SC.Card</item>
+        <item name="materialButtonStyle">@style/Widget.SC.Button</item>
+        <item name="textInputStyle">@style/Widget.SC.TextInput</item>
+        <item name="snackbarStyle">@style/Widget.SC.Snackbar</item>
+
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
     </style>
 
     <style name="Theme.UnitConverter" parent="Base.Theme.UnitConverter" />
-    
-    <!-- Splash Screen Theme -->
+
     <style name="Theme.UnitConverter.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/background_light</item>
+        <item name="windowSplashScreenBackground">@color/paper</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app_logo</item>
-        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="windowSplashScreenAnimationDuration">400</item>
         <item name="postSplashScreenTheme">@style/Theme.UnitConverter</item>
     </style>
-    
-    <!-- Shape Appearances -->
-    <style name="ShapeAppearance.UnitConverter.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
-        <item name="cornerSize">@dimen/corner_small</item>
+
+    <!-- ===== Type scale (sp): 13 / 15 / 17 / 20 / 32, readouts 26 / 34 / 56 ===== -->
+    <style name="TextAppearance.SC.Headline" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/barlow_semibold</item>
+        <item name="android:fontFamily">@font/barlow_semibold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:letterSpacing">-0.01</item>
     </style>
-    
-    <style name="ShapeAppearance.UnitConverter.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
-        <item name="cornerSize">@dimen/corner_standard</item>
+    <style name="TextAppearance.SC.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">@font/barlow_semibold</item>
+        <item name="android:fontFamily">@font/barlow_semibold</item>
+        <item name="android:textSize">20sp</item>
     </style>
-    
-    <style name="ShapeAppearance.UnitConverter.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
-        <item name="cornerSize">@dimen/corner_large</item>
+    <style name="TextAppearance.SC.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/barlow_semibold</item>
+        <item name="android:fontFamily">@font/barlow_semibold</item>
+        <item name="android:textSize">20sp</item>
     </style>
-    
-    <!-- Text Appearances -->
-    <style name="TextAppearance.UnitConverter.Headline1" parent="TextAppearance.Material3.HeadlineLarge">
-        <item name="android:textSize">@dimen/text_size_xxlarge</item>
-        <item name="android:textColor">@color/text_primary_light</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+    <style name="TextAppearance.SC.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">@font/barlow_medium</item>
+        <item name="android:fontFamily">@font/barlow_medium</item>
+        <item name="android:textSize">17sp</item>
     </style>
-    
-    <style name="TextAppearance.UnitConverter.Headline2" parent="TextAppearance.Material3.HeadlineMedium">
-        <item name="android:textSize">@dimen/text_size_xlarge</item>
-        <item name="android:textColor">@color/text_primary_light</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+    <style name="TextAppearance.SC.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="fontFamily">@font/barlow_medium</item>
+        <item name="android:fontFamily">@font/barlow_medium</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">0</item>
     </style>
-    
-    <style name="TextAppearance.UnitConverter.Body1" parent="TextAppearance.Material3.BodyLarge">
-        <item name="android:textSize">@dimen/text_size_normal</item>
-        <item name="android:textColor">@color/text_primary_light</item>
+    <style name="TextAppearance.SC.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/barlow_regular</item>
+        <item name="android:fontFamily">@font/barlow_regular</item>
+        <item name="android:textSize">17sp</item>
     </style>
-    
-    <style name="TextAppearance.UnitConverter.Body2" parent="TextAppearance.Material3.BodyMedium">
-        <item name="android:textSize">@dimen/text_size_medium</item>
-        <item name="android:textColor">@color/text_secondary_light</item>
+    <style name="TextAppearance.SC.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/barlow_regular</item>
+        <item name="android:fontFamily">@font/barlow_regular</item>
+        <item name="android:textSize">15sp</item>
     </style>
-    
-    <!-- Widget Styles -->
-    <style name="Widget.UnitConverter.CardView" parent="Widget.Material3.CardView.Elevated">
-        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
-        <item name="cardElevation">@dimen/card_elevation</item>
-        <item name="rippleColor">@color/ripple_primary</item>
+    <style name="TextAppearance.SC.BodySmall" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/barlow_regular</item>
+        <item name="android:fontFamily">@font/barlow_regular</item>
+        <item name="android:textSize">13sp</item>
     </style>
-    
-    <style name="Widget.UnitConverter.Button" parent="Widget.Material3.Button">
-        <item name="cornerRadius">@dimen/button_corner_radius</item>
+    <style name="TextAppearance.SC.Label" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/barlow_medium</item>
+        <item name="android:fontFamily">@font/barlow_medium</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+    <!-- Small label above a field: sentence case, muted. -->
+    <style name="TextAppearance.SC.FieldLabel" parent="TextAppearance.SC.Label">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/text_muted</item>
+    </style>
+    <!-- Numeric readouts -->
+    <style name="TextAppearance.SC.Readout" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="fontFamily">@font/barlow_condensed_semibold</item>
+        <item name="android:fontFamily">@font/barlow_condensed_semibold</item>
+        <item name="android:textSize">56sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="TextAppearance.SC.ReadoutSmall" parent="TextAppearance.SC.Readout">
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="ShapeAppearance.SC.Tile" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/corner_tile</item>
+    </style>
+
+    <!-- ===== Widgets ===== -->
+    <style name="Widget.SC.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="titleTextAppearance">@style/TextAppearance.SC.TitleLarge</item>
+        <item name="titleTextColor">@color/text_strong</item>
+        <item name="navigationIconTint">@color/text_strong</item>
+    </style>
+
+    <!-- Flat tiles: hairline outline, small radius, no shadow. -->
+    <style name="Widget.SC.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="cardCornerRadius">@dimen/corner_tile</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/rule</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="rippleColor">@color/ripple</item>
+    </style>
+
+    <style name="Widget.SC.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">@dimen/corner_tile</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="elevation">@dimen/elevation_medium</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="backgroundTint">@color/text_strong</item>
+        <item name="android:textColor">@color/paper</item>
+        <item name="android:textAppearance">@style/TextAppearance.SC.Label</item>
     </style>
-    
-    <style name="Widget.UnitConverter.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="cornerRadius">@dimen/button_corner_radius</item>
+    <style name="Widget.SC.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">@dimen/corner_tile</item>
         <item name="android:textAllCaps">false</item>
-        <item name="strokeColor">@color/primary</item>
-        <item name="strokeWidth">@dimen/stroke_medium</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="strokeColor">@color/rule</item>
+        <item name="android:textColor">@color/text_strong</item>
+        <item name="iconTint">@color/text_strong</item>
+        <item name="rippleColor">@color/ripple</item>
+        <item name="android:textAppearance">@style/TextAppearance.SC.Label</item>
     </style>
-    
-    <style name="Widget.UnitConverter.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="boxCornerRadiusTopStart">@dimen/input_corner_radius</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/input_corner_radius</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/input_corner_radius</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/input_corner_radius</item>
-        <item name="boxStrokeColor">@color/primary</item>
-        <item name="hintTextColor">@color/text_secondary_light</item>
+    <style name="Widget.SC.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/text_strong</item>
+        <item name="iconTint">@color/text_strong</item>
+        <item name="rippleColor">@color/ripple</item>
+        <item name="android:textAppearance">@style/TextAppearance.SC.Label</item>
+    </style>
+    <!-- Round swap knob between the two fields. -->
+    <style name="Widget.SC.SwapKnob" parent="Widget.Material3.Button.IconButton.Outlined">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="cornerRadius">26dp</item>
+        <item name="strokeColor">@color/rule</item>
+        <item name="backgroundTint">@color/surface</item>
+        <item name="iconTint">@color/text_strong</item>
+        <item name="iconSize">24dp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="android:padding">14dp</item>
+        <item name="rippleColor">@color/ripple</item>
+    </style>
+    <!-- Small icon action on the tape (copy). -->
+    <style name="Widget.SC.TapeIcon" parent="Widget.Material3.Button.IconButton">
+        <item name="iconTint">@color/on_tape</item>
+        <item name="rippleColor">#331C2A33</item>
+    </style>
+
+    <style name="Widget.SC.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/corner_tile</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/corner_tile</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/corner_tile</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/corner_tile</item>
+        <item name="boxStrokeColor">@color/text_strong</item>
+        <item name="boxBackgroundColor">@color/surface</item>
+        <item name="hintTextColor">@color/text_muted</item>
+        <item name="android:textColorHint">@color/text_faint</item>
+        <item name="endIconTint">@color/text_muted</item>
+        <item name="startIconTint">@color/text_muted</item>
+    </style>
+
+    <style name="Widget.SC.Snackbar" parent="Widget.Material3.Snackbar">
+        <item name="backgroundTint">@color/text_strong</item>
     </style>
 </resources>
