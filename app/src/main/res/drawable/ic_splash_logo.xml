@@ -1,0 +1,11 @@
+<!-- SmartConvert mark: a Samrat Yantra dial with its needle, after Jantar Mantar, Jaipur. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#E8792B" android:pathData="M30,62 A24,24 0 0,1 78,62 L73,62 A19,19 0 0,0 35,62 Z" />
+    <path android:fillColor="#F6E7E1" android:fillAlpha="0.85" android:pathData="M36.50,61.10L41.50,61.10L41.50,62.90L36.50,62.90ZM37.25,56.89L40.15,57.67L39.84,58.83L36.94,58.05ZM39.14,52.73L41.74,54.23L41.14,55.27L38.54,53.77ZM42.26,48.99L45.80,52.52L44.52,53.80L40.99,50.26ZM45.77,46.54L47.27,49.14L46.23,49.74L44.73,47.14ZM50.05,44.94L50.83,47.84L49.67,48.15L48.89,45.25ZM54.90,44.50L54.90,49.50L53.10,49.50L53.10,44.50ZM59.11,45.25L58.33,48.15L57.17,47.84L57.95,44.94ZM63.27,47.14L61.77,49.74L60.73,49.14L62.23,46.54ZM67.01,50.26L63.48,53.80L62.20,52.52L65.74,48.99ZM69.46,53.77L66.86,55.27L66.26,54.23L68.86,52.73ZM71.06,58.05L68.16,58.83L67.85,57.67L70.75,56.89ZM71.50,62.90L66.50,62.90L66.50,61.10L71.50,61.10Z" />
+    <path android:fillColor="#F6E7E1" android:pathData="M23,63.5h62v3.2h-62z" />
+    <path android:fillColor="#F6E7E1" android:pathData="M66.71,47.88L55.93,63.74L52.07,60.26Z" />
+    <path android:fillColor="#E8792B" android:pathData="M54,57.8a4.2,4.2 0,1 1,0 8.4a4.2,4.2 0,1 1,0 -8.4z" />
+    <path android:fillColor="#E8792B" android:pathData="M76,34a3.4,3.4 0,1 1,0 6.8a3.4,3.4 0,1 1,0 -6.8z" />
+</vector>
