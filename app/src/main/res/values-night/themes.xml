@@ -1,0 +1,58 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- 
+        DARK MODE THEME - High contrast OLED optimized
+        Perfect for low-light environments and battery saving
+    -->
+    
+    <!-- Base dark theme -->
+    <style name="Base.Theme.UnitConverter" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color (brighter for dark mode) -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorOnPrimary">@color/text_on_primary</item>
+        
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_variant</item>
+        <item name="colorOnSecondary">@color/text_on_secondary</item>
+        
+        <!-- Tertiary accent color -->
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_dark</item>
+        <item name="colorOnTertiary">@color/text_primary_light</item>
+        
+        <!-- Surface colors -->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurface">@color/text_primary_light</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary_light</item>
+        
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorOnBackground">@color/text_primary_light</item>
+        
+        <!-- Status bar (dark) -->
+        <item name="android:statusBarColor">@color/background_dark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        
+        <!-- Navigation bar (dark) -->
+        <item name="android:navigationBarColor">@color/background_dark</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        
+        <!-- Semantic colors -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/text_primary_dark</item>
+        
+        <!-- Edge to edge -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+    </style>
+    
+    <!-- Splash Screen Theme (Dark) -->
+    <style name="Theme.UnitConverter.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/background_dark</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app_logo</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/Theme.UnitConverter</item>
+    </style>
+</resources>

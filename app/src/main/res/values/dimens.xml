@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 
+        ENHANCED DIMENSIONS - Modern Spacing System
+        Based on 8dp grid system for visual consistency
+    -->
+    
+    <!-- === SPACING SYSTEM (8dp grid) === -->
+    <dimen name="spacing_none">0dp</dimen>
+    <dimen name="spacing_micro">2dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+    <dimen name="spacing_xxlarge">48dp</dimen>
+    <dimen name="spacing_xxxlarge">64dp</dimen>
+    
+    <!-- === PADDING & MARGIN === -->
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">12dp</dimen>
+    <dimen name="padding_standard">16dp</dimen>
+    <dimen name="padding_large">20dp</dimen>
+    <dimen name="padding_xlarge">24dp</dimen>
+    
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">12dp</dimen>
+    <dimen name="margin_standard">16dp</dimen>
+    <dimen name="margin_large">20dp</dimen>
+    <dimen name="margin_xlarge">24dp</dimen>
+    
+    <!-- === CORNER RADIUS === -->
+    <dimen name="corner_small">4dp</dimen>
+    <dimen name="corner_medium">8dp</dimen>
+    <dimen name="corner_standard">12dp</dimen>
+    <dimen name="corner_large">16dp</dimen>
+    <dimen name="corner_xlarge">20dp</dimen>
+    <dimen name="corner_xxlarge">24dp</dimen>
+    <dimen name="corner_round">28dp</dimen>
+    
+    <!-- === ELEVATION === -->
+    <dimen name="elevation_none">0dp</dimen>
+    <dimen name="elevation_low">2dp</dimen>
+    <dimen name="elevation_medium">4dp</dimen>
+    <dimen name="elevation_standard">6dp</dimen>
+    <dimen name="elevation_high">8dp</dimen>
+    <dimen name="elevation_floating">16dp</dimen>
+    
+    <!-- === CARD DIMENSIONS === -->
+    <dimen name="card_corner_radius">16dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_elevation_pressed">8dp</dimen>
+    <dimen name="card_padding">16dp</dimen>
+    <dimen name="card_margin">12dp</dimen>
+    <dimen name="card_min_height">100dp</dimen>
+    
+    <!-- === CATEGORY CARD SPECIFIC === -->
+    <dimen name="category_card_height">120dp</dimen>
+    <dimen name="category_icon_size">48dp</dimen>
+    <dimen name="category_title_size">16sp</dimen>
+    
+    <!-- === BUTTON DIMENSIONS === -->
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_height_small">36dp</dimen>
+    <dimen name="button_height_large">56dp</dimen>
+    <dimen name="button_corner_radius">12dp</dimen>
+    <dimen name="button_padding_horizontal">24dp</dimen>
+    <dimen name="button_padding_vertical">12dp</dimen>
+    
+    <!-- === FAB DIMENSIONS === -->
+    <dimen name="fab_size_normal">56dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    
+    <!-- === TEXT INPUT === -->
+    <dimen name="input_height">56dp</dimen>
+    <dimen name="input_corner_radius">12dp</dimen>
+    <dimen name="input_padding_horizontal">16dp</dimen>
+    
+    <!-- === ICON SIZES === -->
+    <dimen name="icon_tiny">16dp</dimen>
+    <dimen name="icon_small">24dp</dimen>
+    <dimen name="icon_size_small">24dp</dimen>
+    <dimen name="icon_medium">32dp</dimen>
+    <dimen name="icon_size_medium">32dp</dimen>
+    <dimen name="icon_large">48dp</dimen>
+    <dimen name="icon_size_large">48dp</dimen>
+    <dimen name="icon_xlarge">64dp</dimen>
+    <dimen name="icon_size_xlarge">64dp</dimen>
+    
+    <!-- === TEXT SIZES === -->
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_xlarge">24sp</dimen>
+    <dimen name="text_size_xxlarge">32sp</dimen>
+    <dimen name="text_size_display">48sp</dimen>
+    
+    <!-- === APP BAR === -->
+    <dimen name="app_bar_height">56dp</dimen>
+    <dimen name="app_bar_elevation">4dp</dimen>
+    
+    <!-- === BOTTOM SHEET === -->
+    <dimen name="bottom_sheet_corner_radius">24dp</dimen>
+    <dimen name="bottom_sheet_peek_height">80dp</dimen>
+    
+    <!-- === DIVIDER === -->
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="divider_thick">2dp</dimen>
+    
+    <!-- === STROKE/BORDER === -->
+    <dimen name="stroke_thin">1dp</dimen>
+    <dimen name="stroke_medium">2dp</dimen>
+    <dimen name="stroke_thick">3dp</dimen>
+    
+    <!-- === TOUCH TARGET === -->
+    <dimen name="touch_target_min">48dp</dimen>
+</resources>

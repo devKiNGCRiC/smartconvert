@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/historyRoot"
+    android:background="?attr/colorSurface"
+    tools:context=".HistoryActivity">
+
+    <!-- App Bar with gradient background -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_background"
+        android:elevation="0dp">
+
+        <!-- Toolbar -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="0dp"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/history_title"
+            app:titleTextColor="@android:color/white" />
+
+        <!-- Search Bar -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_standard"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/padding_standard"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:hint="@string/search_history_hint"
+            app:boxBackgroundColor="@android:color/white"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_settings">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- TabLayout for All/Favorites -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            app:tabIndicatorColor="@android:color/white"
+            app:tabIndicatorHeight="3dp"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabTextColor="#B3FFFFFF" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- ViewPager2 for swipeable tabs -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <!-- Floating Action Button for Clear All -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabClearAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/padding_standard"
+        android:text="@string/clear_all"
+        app:icon="@drawable/ic_delete"
+        app:backgroundTint="?attr/colorError" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,142 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- 
+        MODERN MATERIAL DESIGN 3 THEME
+        Enhanced with custom colors, typography, and components
+    -->
+    
+    <!-- Base application theme -->
+    <style name="Base.Theme.UnitConverter" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/text_on_primary</item>
+        
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_dark</item>
+        <item name="colorOnSecondary">@color/text_on_secondary</item>
+        
+        <!-- Tertiary accent color -->
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_light</item>
+        <item name="colorOnTertiary">@color/white</item>
+        
+        <!-- Surface colors -->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurface">@color/text_primary_light</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary_light</item>
+        
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorOnBackground">@color/text_primary_light</item>
+        
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@color/background_light</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        
+        <!-- Navigation bar -->
+        <item name="android:navigationBarColor">@color/background_light</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        
+        <!-- Semantic colors -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/white</item>
+        
+        <!-- Shape appearance -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.UnitConverter.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.UnitConverter.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.UnitConverter.LargeComponent</item>
+        
+        <!-- Text appearances -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.UnitConverter.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.UnitConverter.Headline2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.UnitConverter.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.UnitConverter.Body2</item>
+        
+        <!-- Material components -->
+        <item name="materialCardViewStyle">@style/Widget.UnitConverter.CardView</item>
+        <item name="materialButtonStyle">@style/Widget.UnitConverter.Button</item>
+        <item name="textInputStyle">@style/Widget.UnitConverter.TextInputLayout</item>
+        
+        <!-- Edge to edge -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+    </style>
+
+    <style name="Theme.UnitConverter" parent="Base.Theme.UnitConverter" />
+    
+    <!-- Splash Screen Theme -->
+    <style name="Theme.UnitConverter.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/background_light</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app_logo</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/Theme.UnitConverter</item>
+    </style>
+    
+    <!-- Shape Appearances -->
+    <style name="ShapeAppearance.UnitConverter.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">@dimen/corner_small</item>
+    </style>
+    
+    <style name="ShapeAppearance.UnitConverter.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">@dimen/corner_standard</item>
+    </style>
+    
+    <style name="ShapeAppearance.UnitConverter.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSize">@dimen/corner_large</item>
+    </style>
+    
+    <!-- Text Appearances -->
+    <style name="TextAppearance.UnitConverter.Headline1" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textSize">@dimen/text_size_xxlarge</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+    
+    <style name="TextAppearance.UnitConverter.Headline2" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textSize">@dimen/text_size_xlarge</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+    
+    <style name="TextAppearance.UnitConverter.Body1" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+    </style>
+    
+    <style name="TextAppearance.UnitConverter.Body2" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/text_secondary_light</item>
+    </style>
+    
+    <!-- Widget Styles -->
+    <style name="Widget.UnitConverter.CardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="rippleColor">@color/ripple_primary</item>
+    </style>
+    
+    <style name="Widget.UnitConverter.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="elevation">@dimen/elevation_medium</item>
+    </style>
+    
+    <style name="Widget.UnitConverter.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="strokeColor">@color/primary</item>
+        <item name="strokeWidth">@dimen/stroke_medium</item>
+    </style>
+    
+    <style name="Widget.UnitConverter.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/input_corner_radius</item>
+        <item name="boxStrokeColor">@color/primary</item>
+        <item name="hintTextColor">@color/text_secondary_light</item>
+    </style>
+</resources>

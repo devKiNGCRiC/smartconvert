@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    TEACHING NOTE: Conversion Activity Layout
+    
+    This screen handles the actual unit conversion.
+    
+    UX Features:
+    - Real-time conversion (as user types)
+    - Clear input/output sections
+    - Swap button for quick reverse
+    - Dropdown spinners for unit selection
+    - Material Design components
+    - Keyboard-optimized (numeric input)
+    
+    Layout Strategy:
+    - ScrollView: Ensures content visible when keyboard appears
+    - Cards: Group related controls
+    - Consistent spacing: Professional appearance
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/conversionRoot"
+    android:background="@color/background_light"
+    tools:context=".ConversionActivity">
+
+    <!-- App Bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:title="@string/conversion_title"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationIconTint="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Main Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_medium">
+
+            <!-- Input Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_medium">
+
+                    <!-- From Label -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/from_label"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/text_secondary_light"
+                        android:textStyle="bold" />
+
+                    <!-- From Unit Spinner -->
+                    <Spinner
+                        android:id="@+id/fromUnitSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:minHeight="48dp"
+                        android:contentDescription="@string/select_from_unit" />
+
+                    <!-- Input Value -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:hint="@string/input_hint"
+                        app:boxBackgroundMode="outline"
+                        app:boxCornerRadiusTopStart="@dimen/button_corner_radius"
+                        app:boxCornerRadiusTopEnd="@dimen/button_corner_radius"
+                        app:boxCornerRadiusBottomStart="@dimen/button_corner_radius"
+                        app:boxCornerRadiusBottomEnd="@dimen/button_corner_radius"
+                        app:errorEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal|numberSigned"
+                            android:maxLines="1"
+                            android:textSize="@dimen/text_size_xlarge"
+                            android:textColor="@color/text_primary_light" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Swap Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/swapButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="@dimen/spacing_small"
+                android:text="@string/swap_button"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_swap"
+                app:iconGravity="textStart"
+                app:cornerRadius="@dimen/button_corner_radius"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:contentDescription="@string/cd_swap_units" />
+
+            <!-- Output Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation"
+                app:cardBackgroundColor="@color/primary_light">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_medium">
+
+                    <!-- To Label -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/to_label"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/primary_dark"
+                        android:textStyle="bold" />
+
+                    <!-- To Unit Spinner -->
+                    <Spinner
+                        android:id="@+id/toUnitSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:minHeight="48dp"
+                        android:contentDescription="@string/select_to_unit" />
+
+                    <!-- Result Label -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:text="@string/result_label"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/primary_dark"
+                        android:textStyle="bold" />
+
+                    <!-- Result Value -->
+                    <TextView
+                        android:id="@+id/resultValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:textSize="@dimen/text_size_xxlarge"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary_dark"
+                        android:padding="@dimen/spacing_small"
+                        tools:text="3.048" />
+
+                    <!-- Result Unit Symbol -->
+                    <TextView
+                        android:id="@+id/resultUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textColor="@color/primary_dark"
+                        tools:text="meters (m)" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/spacing_small">
+
+                <!-- Clear Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/clearButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:text="@string/clear_button"
+                    android:textAllCaps="false"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    app:cornerRadius="@dimen/button_corner_radius"
+                    android:contentDescription="@string/cd_clear_input" />
+
+            </LinearLayout>
+
+            <!-- Info Text -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="@string/auto_convert_hint"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/text_secondary_light"
+                android:textStyle="italic"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 
+        MODERN COLOR PALETTE - Material Design 3 Enhanced
+        Designed for maximum visual appeal and accessibility
+        Supports multiple theme modes with dynamic accents
+    -->
+    
+    <!-- === BASE COLORS === -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- === PRIMARY BRAND COLORS === -->
+    <!-- AI-themed indigo-blue spectrum (matches new icon) -->
+    <color name="primary">#6366f1</color>
+    <color name="primary_dark">#4f46e5</color>
+    <color name="primary_light">#818cf8</color>
+    <color name="primary_variant">#5b21b6</color>
+    
+    <!-- === SECONDARY ACCENT COLORS === -->
+    <!-- Electric purple accent (AI aesthetic) -->
+    <color name="secondary">#a855f7</color>
+    <color name="secondary_dark">#9333ea</color>
+    <color name="secondary_light">#c084fc</color>
+    <color name="secondary_variant">#7c3aed</color>
+    
+    <!-- === TERTIARY ACCENT === -->
+    <!-- Sky blue for fresh tech feel -->
+    <color name="tertiary">#0ea5e9</color>
+    <color name="tertiary_dark">#0284c7</color>
+    <color name="tertiary_light">#38bdf8</color>
+    
+    <!-- === SURFACE COLORS === -->
+    <!-- Light theme surfaces -->
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#F5F7FA</color>
+    <color name="surface_container">#EEF2F6</color>
+    <color name="surface_container_high">#E8EDF2</color>
+    <color name="surface_container_highest">#E2E8ED</color>
+    
+    <!-- === BACKGROUND COLORS === -->
+    <color name="background_light">#F8FAFB</color>
+    <color name="background_dark">#0A0E13</color>
+    <color name="background_secondary">#F0F4F8</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="surface_dark">#1A1D23</color>
+    
+    <!-- === TEXT COLORS === -->
+    <color name="text_primary_light">#1A1C1E</color>
+    <color name="text_secondary_light">#5F6368</color>
+    <color name="text_tertiary_light">#9AA0A6</color>
+    <color name="text_disabled_light">#C4C7C5</color>
+    <color name="text_primary_dark">#E8EAED</color>
+    <color name="text_secondary_dark">#9AA0A6</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_on_secondary">#FFFFFF</color>
+    
+    <!-- === SEMANTIC COLORS === -->
+    <color name="success">#10B981</color>
+    <color name="success_light">#D1FAE5</color>
+    <color name="error">#EF4444</color>
+    <color name="error_light">#FEE2E2</color>
+    <color name="warning">#F59E0B</color>
+    <color name="warning_light">#FEF3C7</color>
+    <color name="info">#3B82F6</color>
+    <color name="info_light">#DBEAFE</color>
+    
+    <!-- === ELEVATION & SHADOWS === -->
+    <color name="shadow_light">#1A000000</color>
+    <color name="shadow_medium">#33000000</color>
+    <color name="shadow_strong">#4D000000</color>
+    
+    <!-- === GRADIENT COLORS === -->
+    <!-- For cards and special elements -->
+    <color name="gradient_start">#667eea</color>
+    <color name="gradient_middle">#764ba2</color>
+    <color name="gradient_end">#f093fb</color>
+    
+    <!-- Alternative gradients -->
+    <color name="gradient_blue_start">#4facfe</color>
+    <color name="gradient_blue_end">#00f2fe</color>
+    
+    <color name="gradient_green_start">#43e97b</color>
+    <color name="gradient_green_end">#38f9d7</color>
+    
+    <color name="gradient_orange_start">#fa709a</color>
+    <color name="gradient_orange_end">#fee140</color>
+    
+    <!-- === CATEGORY-SPECIFIC COLORS === -->
+    <!-- Unique colors for each conversion category -->
+    <color name="category_length">#667eea</color>
+    <color name="category_weight">#f093fb</color>
+    <color name="category_temperature">#ff6b6b</color>
+    <color name="category_volume">#4facfe</color>
+    <color name="category_area">#51cf66</color>
+    <color name="category_speed">#ffd43b</color>
+    <color name="category_time">#9775fa</color>
+    <color name="category_storage">#20c997</color>
+    
+    <!-- === GLASSMORPHISM === -->
+    <color name="glass_background">#E6FFFFFF</color>
+    <color name="glass_border">#33FFFFFF</color>
+    <color name="glass_shadow">#1A000000</color>
+    
+    <!-- === DIVIDERS & BORDERS === -->
+    <color name="divider">#E0E0E0</color>
+    <color name="divider_dark">#2D3139</color>
+    <color name="divider_strong">#BDBDBD</color>
+    <color name="border_light">#EEEEEE</color>
+    <color name="border_medium">#E0E0E0</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="card_background_dark">#1F2329</color>
+    
+    <!-- === RIPPLE EFFECTS === -->
+    <color name="ripple_light">#1A667eea</color>
+    <color name="ripple_dark">#1FFFFFFF</color>
+    <color name="ripple_primary">#33667eea</color>
+    <color name="ripple_secondary">#33f093fb</color>
+</resources>

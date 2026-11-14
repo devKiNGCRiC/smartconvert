@@ -1,0 +1,95 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">SmartConvert</string>
+    
+    <!-- Main Screen -->
+    <string name="main_title">SmartConvert</string>
+    <string name="main_subtitle">Fast, accurate unit converter for everyday use</string>
+    <string name="category_selection_title">Choose Category</string>
+    
+    <!-- Conversion Screen -->
+    <string name="conversion_title">Convert %s</string>
+    <string name="input_label">Enter value</string>
+    <string name="from_label">From</string>
+    <string name="to_label">To</string>
+    <string name="result_label">Result</string>
+    <string name="convert_button">Convert</string>
+    <string name="clear_button">Clear</string>
+    <string name="swap_button">Swap Units</string>
+    
+    <!-- Hints and Placeholders -->
+    <string name="input_hint">Enter value to convert</string>
+    <string name="select_from_unit">Select source unit</string>
+    <string name="select_to_unit">Select target unit</string>
+    <string name="no_result">Result will appear here</string>
+    
+    <!-- Error Messages -->
+    <string name="error_invalid_input">Please enter a valid number</string>
+    <string name="error_same_units">Source and target units cannot be the same</string>
+    <string name="error_conversion_failed">Conversion failed. Please try again.</string>
+    <string name="error_no_category">No category selected</string>
+    <string name="error_infinite_value">Value cannot be infinite</string>
+    <string name="error_nan_value">Invalid number</string>
+    
+    <!-- Content Descriptions (Accessibility) -->
+    <string name="cd_category_icon">Category icon for %s</string>
+    <string name="cd_swap_units">Swap source and target units</string>
+    <string name="cd_clear_input">Clear input and results</string>
+    <string name="cd_back_button">Go back to category selection</string>
+    
+    <!-- Categories -->
+    <string name="category_length">Length</string>
+    <string name="category_weight">Weight</string>
+    <string name="category_temperature">Temperature</string>
+    <string name="category_volume">Volume</string>
+    <string name="category_area">Area</string>
+    <string name="category_speed">Speed</string>
+    <string name="category_time">Time</string>
+    <string name="category_digital_storage">Digital Storage</string>
+    
+    <!-- Empty States -->
+    <string name="empty_categories">No categories available</string>
+    <string name="empty_units">No units available for this category</string>
+    
+    <!-- Loading -->
+    <string name="loading">Loading…</string>
+    
+    <!-- Success Messages -->
+    <string name="conversion_successful">Conversion completed</string>
+    
+    <string name="auto_convert_hint">Conversion happens automatically as you type</string>
+
+    <!-- Tooltips -->
+    <string name="tooltip_swap">Tap to swap units</string>
+    <string name="tooltip_clear">Tap to clear all</string>
+    
+    <!-- History & Favorites -->
+    <string name="history_title">History &amp; Favorites</string>
+    <string name="tab_all_history">All History</string>
+    <string name="tab_favorites">Favorites</string>
+    <string name="search_history_hint">Search conversions…</string>
+    <string name="clear_all">Clear All</string>
+    <string name="clear_favorites">Clear Favorites</string>
+    <string name="delete">Delete</string>
+    <string name="reuse">Reuse</string>
+    <string name="toggle_favorite">Toggle favorite</string>
+    <string name="converts_to">Converts to</string>
+    <string name="empty_history">No History Yet</string>
+    <string name="empty_history_message">Your conversion history will appear here</string>
+    <string name="no_search_results">No Matches</string>
+    <string name="no_search_results_message">Try a different search</string>
+    <string name="empty_favorites">No Favorites Yet</string>
+    <string name="empty_favorites_message">Star conversions to save them as favorites</string>
+    <string name="recent_conversions">Recent Conversions</string>
+    <string name="view_all">View All</string>
+    <string name="added_to_favorites">Added to favorites</string>
+    <string name="removed_from_favorites">Removed from favorites</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="confirm_clear_all">Clear all history?</string>
+    <string name="confirm_clear_message">This will delete all conversion history. Favorites will be kept.</string>
+    <string name="confirm_clear_all_including_favorites">This will delete all history including favorites. This cannot be undone.</string>
+    <string name="confirm_delete">Are you sure?</string>
+    <string name="cancel">Cancel</string>
+    <string name="item_deleted">Item deleted</string>
+    <string name="undo">Undo</string>
+</resources>
