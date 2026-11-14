@@ -37,6 +37,8 @@
 
         <!-- Lowest-precedence default font for every TextView -->
         <item name="android:textAppearance">@style/TextAppearance.SC.Body</item>
+        <!-- Safety net: TextViews without their own style still get Mukta -->
+        <item name="android:textViewStyle">@style/Widget.SC.TextView</item>
         <item name="textAppearanceHeadlineMedium">@style/TextAppearance.SC.Headline</item>
         <item name="textAppearanceHeadlineSmall">@style/TextAppearance.SC.Title</item>
         <item name="textAppearanceTitleLarge">@style/TextAppearance.SC.Title</item>
@@ -273,6 +275,10 @@
     </style>
 
     <!-- ===================== Widgets ===================== -->
+    <style name="Widget.SC.TextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.SC.Body</item>
+    </style>
+
     <style name="Widget.SC.Toolbar" parent="Widget.Material3.Toolbar">
         <item name="android:background">@android:color/transparent</item>
         <item name="titleTextAppearance">@style/TextAppearance.SC.Title</item>

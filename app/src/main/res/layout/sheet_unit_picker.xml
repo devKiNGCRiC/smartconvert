@@ -40,6 +40,7 @@
 
     <TextView
         android:id="@+id/pickerEmpty"
+            android:textAppearance="@style/TextAppearance.SC.Body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

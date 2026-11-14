@@ -88,7 +88,9 @@ public class ArcDialView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int w = MeasureSpec.getSize(widthMeasureSpec);
-        int h = Math.round(w * 0.56f);
+        // Cap the height so the dial stays compact on landscape phones and tablets;
+        // onDraw centres it horizontally and sizes the radius from the height.
+        int h = Math.min(Math.round(w * 0.56f), Math.round(200 * dp));
         setMeasuredDimension(w, resolveSize(h, heightMeasureSpec));
     }
 
